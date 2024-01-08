@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Sites API",
-    "description": "This is the api specs for all things related to sites",
+    "description": "Sites API",
     "contact": {
       "name": "ChilliPharm",
       "url": "https://www.chillipharm.com"
@@ -11,8 +11,12 @@
   },
   "tags": [
     {
-      "name": "Example",
-      "description": "Example endpoints"
+      "name": "Sites",
+      "description": "Endpoints for sites"
+    },
+    {
+      "name": "Users",
+      "description": "Endpoints for site users"
     }
   ],
   "servers": [
@@ -26,9 +30,14 @@
     }
   ],
   "paths": {
-    "/example": {
+    "/accounts/{account_id}/sites/{site_identifier}": {
       "get": {
-        "summary": "Example endpoint",
+        "summary": "Get a site for account",
+        "description": "Get a site for account",
+        "operationId": "getSite",
+        "tags": [
+          "Sites"
+        ],
         "security": [
           {
             "userSessionKey": []
@@ -37,21 +46,27 @@
             "chillipharmSession": []
           }
         ],
-        "operationId": "getExample",
-        "description": "This is an example endpoint",
         "parameters": [
           {
-            "name": "example",
-            "in": "query",
-            "description": "Example parameter",
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
             }
           }
-        ],
-        "tags": [
-          "Example"
         ],
         "responses": {
           "200": {
@@ -59,7 +74,77 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ExampleResponse"
+                  "$ref": "#/components/schemas/Site"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/users": {
+      "get": {
+        "summary": "Get users for site",
+        "description": "Get users for site",
+        "operationId": "getSiteUsers",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "userSessionKey": []
+          },
+          {
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteUsers"
                 }
               }
             }
@@ -96,13 +181,197 @@
       }
     },
     "schemas": {
-      "ExampleResponse": {
+      "Site": {
+        "description": "A site",
         "type": "object",
         "properties": {
-          "example": {
-            "type": "string"
+          "country": {
+            "type": "string",
+            "description": "The country of site",
+            "example": "GB"
+          },
+          "id": {
+            "type": "number",
+            "description": "The id of site",
+            "example": 1
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of site",
+            "example": "SITE1"
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of site",
+            "example": "Site 1"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "The permissions of current user for a site",
+            "items": {
+              "type": "string",
+              "description": "The permission name",
+              "example": "can_create_forms"
+            }
+          },
+          "study_protocol": {
+            "type": "object",
+            "nullable": true,
+            "description": "The study protocol of site",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StudyProtocol"
+            }
           }
+        },
+        "additionalProperties": false,
+        "required": [
+          "country",
+          "id",
+          "identifier",
+          "name",
+          "permissions",
+          "study_protocol"
+        ]
+      },
+      "StudyProtocol": {
+        "description": "A study protocol",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The id of study protocol",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of study protocol",
+            "example": "Alpha Protocol"
+          },
+          "study_event_display_name": {
+            "type": "object",
+            "description": "The study event display name",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StudyProtocolObjectName"
+            }
+          },
+          "study_procedure_display_name": {
+            "type": "object",
+            "description": "The study procedure display name",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/StudyProtocolObjectName"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "study_event_display_name",
+          "study_procedure_display_name"
+        ]
+      },
+      "StudyProtocolObjectName": {
+        "description": "A study protocol object name",
+        "type": "object",
+        "properties": {
+          "plural": {
+            "type": "string",
+            "description": "The plural form of study protocol object name",
+            "example": "visits"
+          },
+          "singular": {
+            "type": "string",
+            "description": "The singular form of study protocol object name",
+            "example": "visit"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "plural",
+          "singular"
+        ]
+      },
+      "SiteUsers": {
+        "description": "A collection of site users",
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/SiteUser"
         }
+      },
+      "SiteUser": {
+        "description": "A site user",
+        "type": "object",
+        "properties": {
+          "admin": {
+            "type": "boolean",
+            "description": "The admin user type indicator",
+            "example": true
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of site user",
+            "example": "john.doe@example.com"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of site user",
+            "example": "John"
+          },
+          "id": {
+            "type": "number",
+            "description": "The id of site user",
+            "example": 1
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of site user",
+            "example": "Doe"
+          },
+          "role": {
+            "type": "object",
+            "nullable": true,
+            "description": "The role of site user",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Role"
+            }
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The uuid of site user",
+            "example": "c40a88fc-189e-4bbf-8606-9c7b57030e21"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "admin",
+          "email",
+          "first_name",
+          "id",
+          "last_name",
+          "role",
+          "uuid"
+        ]
+      },
+      "Role": {
+        "description": "A user role",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The id of role",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of role",
+            "example": "Guest"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name"
+        ]
       },
       "Error": {
         "description": "An error",
@@ -127,16 +396,6 @@
           }
         }
       },
-      "Unauthorized": {
-        "description": "Unauthorized. Missing or invalid authentication credentials.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/Error"
-            }
-          }
-        }
-      },
       "Conflict": {
         "description": "Conflict. The request could not be completed due to a conflict with the current state of the resource.",
         "content": {
@@ -147,8 +406,64 @@
           }
         }
       },
+      "Forbidden": {
+        "description": "Forbidden. The request was valid, but the server is refusing action.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "The error message",
+                  "example": "You do not have sufficient permission to perform this action",
+                  "enum": [
+                    "You do not have sufficient permission to perform this action",
+                    "Forbidden"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "InternalServerError": {
         "description": "Internal server error. Please contact support.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Not found. The requested resource was not found.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "description": "An error",
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "The error message",
+                  "example": "Not found",
+                  "enum": [
+                    "Not found"
+                  ]
+                }
+              },
+              "required": [
+                "error"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized. Missing or invalid authentication credentials.",
         "content": {
           "application/json": {
             "schema": {
