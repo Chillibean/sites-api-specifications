@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "0.0.1",
+    "version": "1.0.0",
     "title": "Sites API",
     "description": "This is the api specs for all things related to sites",
     "contact": {
