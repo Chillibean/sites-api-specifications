@@ -354,7 +354,6 @@
           "first_name",
           "id",
           "last_name",
-          "role",
           "uuid"
         ]
       },
