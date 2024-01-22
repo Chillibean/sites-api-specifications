@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "title": "Sites API",
     "description": "Sites API",
     "contact": {
@@ -227,6 +227,17 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/StudyProtocol"
             }
+          },
+          "go_live_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The go live date of site",
+            "example": "2020-01-01"
+          },
+          "is_live": {
+            "type": "boolean",
+            "description": "The live indicator of site",
+            "example": true
           }
         },
         "additionalProperties": false,
@@ -236,7 +247,9 @@
           "identifier",
           "name",
           "permissions",
-          "study_protocol"
+          "study_protocol",
+          "go_live_date",
+          "is_live"
         ]
       },
       "StudyProtocol": {
