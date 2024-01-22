@@ -227,6 +227,17 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/StudyProtocol"
             }
+          },
+          "go_live_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The go live date of site",
+            "example": "2020-01-01"
+          },
+          "live?": {
+            "type": "boolean",
+            "description": "The live indicator of site",
+            "example": true
           }
         },
         "additionalProperties": false,
@@ -236,7 +247,9 @@
           "identifier",
           "name",
           "permissions",
-          "study_protocol"
+          "study_protocol",
+          "go_live_date",
+          "live?"
         ]
       },
       "StudyProtocol": {
