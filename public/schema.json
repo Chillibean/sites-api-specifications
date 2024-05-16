@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "1.1.1",
+    "version": "1.1.2",
     "title": "Sites API",
     "description": "Sites API",
     "contact": {
@@ -238,6 +238,11 @@
             "type": "boolean",
             "description": "The live indicator of site",
             "example": true
+          },
+          "anonymised_assets": {
+            "type": "boolean",
+            "description": "The anonymised assets indicator of site",
+            "example": true
           }
         },
         "additionalProperties": false,
@@ -249,7 +254,8 @@
           "permissions",
           "study_protocol",
           "go_live_date",
-          "is_live"
+          "is_live",
+          "anonymised_assets"
         ]
       },
       "StudyProtocol": {
