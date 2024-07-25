@@ -1,0 +1,21 @@
+{
+  "description": "A user role",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The id of role",
+      "example": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of role",
+      "example": "Guest"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name"
+  ]
+}
