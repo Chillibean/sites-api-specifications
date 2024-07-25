@@ -1,0 +1,10 @@
+{
+  "description": "Unauthorized. Missing or invalid authentication credentials.",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../schemas/Error.json"
+      }
+    }
+  }
+}

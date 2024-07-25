@@ -1,0 +1,21 @@
+{
+  "description": "A study protocol object name",
+  "type": "object",
+  "properties": {
+    "plural": {
+      "type": "string",
+      "description": "The plural form of study protocol object name",
+      "example": "visits"
+    },
+    "singular": {
+      "type": "string",
+      "description": "The singular form of study protocol object name",
+      "example": "visit"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "plural",
+    "singular"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "description": "A study protocol",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The id of study protocol",
+      "example": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of study protocol",
+      "example": "Alpha Protocol"
+    },
+    "study_event_display_name": {
+      "type": "object",
+      "description": "The study event display name",
+      "additionalProperties": {
+        "$ref": "./StudyProtocolObjectName.json"
+      }
+    },
+    "study_procedure_display_name": {
+      "type": "object",
+      "description": "The study procedure display name",
+      "additionalProperties": {
+        "$ref": "./StudyProtocolObjectName.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "study_event_display_name",
+    "study_procedure_display_name"
+  ]
+}
