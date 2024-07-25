@@ -1,0 +1,7 @@
+{
+  "description": "A collection of site users",
+  "type": "array",
+  "items": {
+    "$ref": "./SiteUser.json"
+  }
+}

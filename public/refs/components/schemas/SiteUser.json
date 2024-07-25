@@ -1,0 +1,53 @@
+{
+  "description": "A site user",
+  "type": "object",
+  "properties": {
+    "admin": {
+      "type": "boolean",
+      "description": "The admin user type indicator",
+      "example": true
+    },
+    "email": {
+      "type": "string",
+      "description": "The email of site user",
+      "example": "john.doe@example.com"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "The first name of site user",
+      "example": "John"
+    },
+    "id": {
+      "type": "number",
+      "description": "The id of site user",
+      "example": 1
+    },
+    "last_name": {
+      "type": "string",
+      "description": "The last name of site user",
+      "example": "Doe"
+    },
+    "role": {
+      "type": "object",
+      "nullable": true,
+      "description": "The role of site user",
+      "additionalProperties": {
+        "$ref": "./Role.json"
+      }
+    },
+    "uuid": {
+      "type": "string",
+      "description": "The uuid of site user",
+      "example": "c40a88fc-189e-4bbf-8606-9c7b57030e21"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "admin",
+    "email",
+    "first_name",
+    "id",
+    "last_name",
+    "uuid"
+  ]
+}

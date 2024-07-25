@@ -1,0 +1,11 @@
+{
+  "description": "An error",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "description": "The error message",
+      "example": "Bad request. Missing or invalid input parameters."
+    }
+  }
+}

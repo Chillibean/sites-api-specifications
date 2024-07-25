@@ -1,0 +1,71 @@
+{
+  "description": "A site",
+  "type": "object",
+  "properties": {
+    "country": {
+      "type": "string",
+      "description": "The country of site",
+      "example": "GB"
+    },
+    "id": {
+      "type": "number",
+      "description": "The id of site",
+      "example": 1
+    },
+    "identifier": {
+      "type": "string",
+      "description": "The identifier of site",
+      "example": "SITE1"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of site",
+      "example": "Site 1"
+    },
+    "permissions": {
+      "type": "array",
+      "description": "The permissions of current user for a site",
+      "items": {
+        "type": "string",
+        "description": "The permission name",
+        "example": "can_create_forms"
+      }
+    },
+    "study_protocol": {
+      "type": "object",
+      "nullable": true,
+      "description": "The study protocol of site",
+      "additionalProperties": {
+        "$ref": "./StudyProtocol.json"
+      }
+    },
+    "go_live_date": {
+      "type": "string",
+      "format": "date",
+      "description": "The go live date of site",
+      "example": "2020-01-01"
+    },
+    "is_live": {
+      "type": "boolean",
+      "description": "The live indicator of site",
+      "example": true
+    },
+    "anonymised_assets": {
+      "type": "boolean",
+      "description": "The anonymised assets indicator of site",
+      "example": true
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "country",
+    "id",
+    "identifier",
+    "name",
+    "permissions",
+    "study_protocol",
+    "go_live_date",
+    "is_live",
+    "anonymised_assets"
+  ]
+}
