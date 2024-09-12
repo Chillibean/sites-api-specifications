@@ -36,7 +36,7 @@
     "/accounts/{account_id}/sites/{site_identifier}/users": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_users.json"
     },
-    "/api/v1/accounts/{account_id}/sites/{site_identifier}/notifiable_users": {
+    "/accounts/{account_id}/sites/{site_identifier}/notifiable_users": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_notifiable_users.json"
     }
   },
