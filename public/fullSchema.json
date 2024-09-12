@@ -170,7 +170,7 @@
         }
       }
     },
-    "/api/v1/accounts/{account_id}/sites/{site_identifier}/notifiable_users": {
+    "/accounts/{account_id}/sites/{site_identifier}/notifiable_users": {
       "get": {
         "summary": "Get notifiable users for site",
         "description": "Get notifiable users for site",
