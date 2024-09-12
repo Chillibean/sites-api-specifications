@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "2.0.5",
+    "version": "2.1.0",
     "title": "Sites API",
     "description": "Sites API",
     "contact": {
@@ -35,6 +35,9 @@
     },
     "/accounts/{account_id}/sites/{site_identifier}/users": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_users.json"
+    },
+    "/api/v1/accounts/{account_id}/sites/{site_identifier}/notifiable_users": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_notifiable_users.json"
     }
   },
   "components": {
