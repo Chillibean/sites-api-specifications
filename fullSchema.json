@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "2.0.6",
+    "version": "2.0.7",
     "title": "Sites API",
     "description": "Sites API",
     "contact": {
