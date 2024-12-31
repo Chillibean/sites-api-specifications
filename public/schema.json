@@ -163,6 +163,9 @@
       "AssetShort": {
         "$ref": "refs/components/schemas/AssetShort.json"
       },
+      "AuthenticityToken": {
+        "$ref": "refs/components/schemas/AuthenticityToken.json"
+      },
       "Error": {
         "$ref": "refs/components/schemas/Error.json"
       },
