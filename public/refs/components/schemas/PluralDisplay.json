@@ -1,0 +1,16 @@
+{
+  "description": "Pluralised naming conventions",
+  "type": "object",
+  "properties": {
+    "plural": {
+      "description": "The plural name",
+      "type": "string",
+      "example": "visits"
+    },
+    "singular": {
+      "description": "The singular name",
+      "type": "string",
+      "example": "visit"
+    }
+  }
+}

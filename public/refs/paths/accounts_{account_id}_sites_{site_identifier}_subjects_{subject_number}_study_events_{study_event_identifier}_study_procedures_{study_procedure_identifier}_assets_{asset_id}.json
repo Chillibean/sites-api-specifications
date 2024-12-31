@@ -1,0 +1,126 @@
+{
+  "put": {
+    "summary": "Update an asset in a study procedure",
+    "description": "Update an asset in a study procedure",
+    "operationId": "updateStudyProcedureAsset",
+    "tags": [
+      "Study Procedure Assets"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
+      },
+      {
+        "name": "asset_id",
+        "in": "path",
+        "description": "The asset id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      }
+    ],
+    "requestBody": {
+      "description": "Asset update parameters",
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "filename": {
+                "type": "string",
+                "description": "The asset filename",
+                "example": "video.mp4"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../components/schemas/Asset.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "put": {
+    "summary": "Update a flagged task",
+    "description": "Update a flagged task",
+    "operationId": "updateStudyProcedureFlaggedTask",
+    "tags": [
+      "Study Procedure Tasks"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
+      },
+      {
+        "name": "task_id",
+        "in": "path",
+        "description": "The flagged task id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "e390325f-d528-4704-80ec-1dec0f317268"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "type": "string",
+                "description": "The authenticity token",
+                "example": "valid_token"
+              },
+              "reason_for_creation": {
+                "type": "string",
+                "description": "The reason for flagging the task",
+                "example": "Please update the asset names"
+              },
+              "reason_for_resolving": {
+                "type": "string",
+                "description": "The reason for resolving the task",
+                "example": "This has been completed"
+              },
+              "notify_users_list": {
+                "type": "array",
+                "description": "The list of user emails to notify",
+                "items": {
+                  "type": "string",
+                  "example": "test@gmail.com"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "flagged_tasks": {
+                  "items": {
+                    "$ref": "../components/schemas/FlaggedTask.json"
+                  }
+                },
+                "flagged_tasks_complete": {
+                  "type": "boolean",
+                  "description": "Flagged tasks completed"
+                },
+                "all_tasks_complete": {
+                  "type": "boolean",
+                  "description": "All tasks completed"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}

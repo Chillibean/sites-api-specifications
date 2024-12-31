@@ -1,0 +1,216 @@
+{
+  "get": {
+    "summary": "Get a study event",
+    "description": "Get a study event",
+    "operationId": "getStudyEvent",
+    "tags": [
+      "Study Events"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Returns a study event for a study subject",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../components/schemas/StudyEvent.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  },
+  "put": {
+    "summary": "Update a study event",
+    "description": "Update a study event",
+    "operationId": "updateStudyEvent",
+    "tags": [
+      "Study Events"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "type": "string",
+                "description": "The authenticity token",
+                "example": "valid_token"
+              },
+              "date": {
+                "type": "string",
+                "description": "The date this study event took place",
+                "example": "2024-01-03"
+              }
+            },
+            "required": [
+              "authenticity_token",
+              "date"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "schedule": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../components/schemas/StudyEvent.json"
+                  }
+                },
+                "study_event": {
+                  "$ref": "../components/schemas/StudyEvent.json"
+                }
+              },
+              "required": [
+                "schedule",
+                "study_event"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}

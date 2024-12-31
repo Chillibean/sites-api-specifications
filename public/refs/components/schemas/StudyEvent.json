@@ -1,0 +1,95 @@
+{
+  "description": "A scheduled event for a subject",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The event id",
+      "example": 1,
+      "nullable": true
+    },
+    "date": {
+      "type": "string",
+      "description": "The date of the event",
+      "example": "2024-01-02",
+      "nullable": true
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the event",
+      "example": "Day 1"
+    },
+    "identifier": {
+      "type": "string",
+      "description": "The identifier of the event",
+      "example": "DAY1"
+    },
+    "position": {
+      "type": "number",
+      "description": "The position of the event",
+      "example": 1,
+      "nullable": true
+    },
+    "procedures": {
+      "type": "array",
+      "description": "The procedures for the event",
+      "items": {
+        "$ref": "./StudyProcedure.json"
+      }
+    },
+    "protocol": {
+      "$ref": "./StudyProtocol.json"
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the event",
+      "example": "complete",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete",
+        "requires_attention",
+        "not_required"
+      ]
+    },
+    "study_arm": {
+      "type": "string",
+      "description": "The study arm of the event",
+      "example": "Arm 1",
+      "nullable": true
+    },
+    "study_event_type": {
+      "type": "string",
+      "description": "The study event type of the event",
+      "example": "scheduled",
+      "enum": [
+        "scheduled",
+        "unscheduled"
+      ]
+    },
+    "contains_flagged_tasks": {
+      "type": "boolean",
+      "description": "Whether the event contains flagged tasks",
+      "example": true
+    },
+    "flagged_tasks_all_completed": {
+      "type": "boolean",
+      "description": "Whether all flagged tasks are completed",
+      "example": true
+    }
+  },
+  "required": [
+    "identifier",
+    "display_name",
+    "date",
+    "status",
+    "procedures",
+    "study_arm",
+    "protocol",
+    "study_event_type",
+    "position",
+    "contains_flagged_tasks",
+    "flagged_tasks_all_completed"
+  ],
+  "additionalProperties": false
+}

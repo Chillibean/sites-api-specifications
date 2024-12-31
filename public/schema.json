@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "2.0.7",
+    "version": "3.0.0",
     "title": "Sites API",
-    "description": "Sites API",
+    "description": "This is the api specifications for all things related to sites.",
     "contact": {
       "name": "ChilliPharm",
       "url": "https://www.chillipharm.com"
@@ -15,14 +15,58 @@
       "description": "Endpoints for sites"
     },
     {
-      "name": "Users",
+      "name": "Site Users",
       "description": "Endpoints for site users"
+    },
+    {
+      "name": "Study Subjects",
+      "description": "Endpoints for Study Subjects"
+    },
+    {
+      "name": "Study Events",
+      "description": "Endpoints for Study Events"
+    },
+    {
+      "name": "Study Procedures",
+      "description": "Endpoints for Study Procedures"
+    },
+    {
+      "name": "Study Procedure Assets",
+      "description": "Endpoints for Study Procedure Assets"
+    },
+    {
+      "name": "Study Procedure Clinical Evaluators",
+      "description": "Endpoints for study procedure clinical evaluators"
+    },
+    {
+      "name": "Study Procedure Tasks",
+      "description": "Endpoints for study procedure tasks"
+    },
+    {
+      "name": "Study Procedure Updates",
+      "description": "Endpoints for study procedure updates"
+    },
+    {
+      "name": "Study Procedure Uploads",
+      "description": "Endpoints for uploading study procedure uploads"
     }
   ],
   "servers": [
     {
       "url": "http://chillipharm.test:3000/api/v1",
       "description": "Local development"
+    },
+    {
+      "url": "https://qa.chillipharm.dev/api/v1",
+      "description": "QA"
+    },
+    {
+      "url": "https://chillipharm-staging.com/api/v1",
+      "description": "Staging"
+    },
+    {
+      "url": "https://chillipharm-uat.com/api/v1",
+      "description": "UAT"
     },
     {
       "url": "https://www.chillipharm.com/api/v1",
@@ -32,6 +76,66 @@
   "paths": {
     "/accounts/{account_id}/sites/{site_identifier}": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_assets.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/{asset_id}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_assets_{asset_id}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/move": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_assets_move.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/update_positions": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_assets_update_positions.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/clinical_evaluators": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_clinical_evaluators.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/flagged_tasks": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_flagged_tasks.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/flagged_tasks/{task_id}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_flagged_tasks_{task_id}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/tasks": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_tasks.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/tasks/{task_id}": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_tasks_{task_id}.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_updates.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/abort_multipart": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_uploads_abort_multipart.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/complete_multipart": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_uploads_complete_multipart.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/start_multipart": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_uploads_start_multipart.json"
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/upload_part": {
+      "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_uploads_upload_part.json"
     },
     "/accounts/{account_id}/sites/{site_identifier}/users": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}_users.json"
@@ -53,11 +157,32 @@
       }
     },
     "schemas": {
+      "Asset": {
+        "$ref": "refs/components/schemas/Asset.json"
+      },
+      "AssetShort": {
+        "$ref": "refs/components/schemas/AssetShort.json"
+      },
       "Error": {
         "$ref": "refs/components/schemas/Error.json"
       },
+      "Evaluator": {
+        "$ref": "refs/components/schemas/Evaluator.json"
+      },
+      "FlaggedTask": {
+        "$ref": "refs/components/schemas/FlaggedTask.json"
+      },
+      "PluralDisplay": {
+        "$ref": "refs/components/schemas/PluralDisplay.json"
+      },
+      "ProcedureFlaggedTaskNotifyDetails": {
+        "$ref": "refs/components/schemas/ProcedureFlaggedTaskNotifyDetails.json"
+      },
       "Role": {
         "$ref": "refs/components/schemas/Role.json"
+      },
+      "RoleDefinition": {
+        "$ref": "refs/components/schemas/RoleDefinition.json"
       },
       "Site": {
         "$ref": "refs/components/schemas/Site.json"
@@ -65,14 +190,32 @@
       "SiteUser": {
         "$ref": "refs/components/schemas/SiteUser.json"
       },
-      "SiteUsers": {
-        "$ref": "refs/components/schemas/SiteUsers.json"
+      "StudyEvent": {
+        "$ref": "refs/components/schemas/StudyEvent.json"
+      },
+      "StudyProcedure": {
+        "$ref": "refs/components/schemas/StudyProcedure.json"
+      },
+      "StudyProcedureUpdate": {
+        "$ref": "refs/components/schemas/StudyProcedureUpdate.json"
       },
       "StudyProtocol": {
         "$ref": "refs/components/schemas/StudyProtocol.json"
       },
       "StudyProtocolObjectName": {
         "$ref": "refs/components/schemas/StudyProtocolObjectName.json"
+      },
+      "StudySubject": {
+        "$ref": "refs/components/schemas/StudySubject.json"
+      },
+      "Task": {
+        "$ref": "refs/components/schemas/Task.json"
+      },
+      "User": {
+        "$ref": "refs/components/schemas/User.json"
+      },
+      "VideoTranscode": {
+        "$ref": "refs/components/schemas/VideoTranscode.json"
       }
     }
   }

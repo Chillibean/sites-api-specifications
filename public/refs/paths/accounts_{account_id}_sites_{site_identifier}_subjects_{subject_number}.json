@@ -1,0 +1,196 @@
+{
+  "get": {
+    "summary": "Get a specific study subject for a site",
+    "description": "Get a specific study subject for a site",
+    "operationId": "getSubject",
+    "tags": [
+      "Study Subjects"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Returns a specific study subject",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../components/schemas/StudySubject.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  },
+  "put": {
+    "summary": "Update a study subject for a site",
+    "description": "Update a study subject for a site",
+    "operationId": "updateSubject",
+    "tags": [
+      "Study Subjects"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "type": "string",
+                "description": "The authenticity token",
+                "example": "valid_token"
+              },
+              "study_arm_id": {
+                "type": "integer",
+                "description": "The study arm id",
+                "example": 1,
+                "nullable": true
+              },
+              "study_cohort_id": {
+                "type": "integer",
+                "description": "The study cohort id",
+                "example": 1,
+                "nullable": true
+              }
+            },
+            "required": [
+              "authenticity_token"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Updated study subject",
+        "content": {
+          "application/json": {
+            "schema": {
+              "properties": {
+                "schedule": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../components/schemas/StudyEvent.json"
+                  }
+                },
+                "subject": {
+                  "$ref": "../components/schemas/StudySubject.json"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}
