@@ -170,16 +170,19 @@
             "type": "object",
             "properties": {
               "authenticity_token": {
-                "type": "string",
-                "description": "The auth token",
-                "example": "valid_token"
+                "$ref": "../components/schemas/AuthenticityToken.json"
               },
               "comment": {
                 "type": "string",
                 "description": "The comment",
                 "example": "comment"
               }
-            }
+            },
+            "required": [
+              "authenticity_token",
+              "comment"
+            ],
+            "additionalProperties": false
           }
         }
       }

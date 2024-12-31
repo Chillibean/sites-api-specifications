@@ -81,16 +81,19 @@
             "type": "object",
             "properties": {
               "authenticity_token": {
-                "type": "string",
-                "description": "The auth token",
-                "example": "valid_token"
+                "$ref": "../components/schemas/AuthenticityToken.json"
               },
               "completed": {
                 "type": "boolean",
                 "description": "The task being completed or not",
                 "example": true
               }
-            }
+            },
+            "required": [
+              "authenticity_token",
+              "completed"
+            ],
+            "additionalProperties": false
           }
         }
       }

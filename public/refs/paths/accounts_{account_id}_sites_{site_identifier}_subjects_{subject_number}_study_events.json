@@ -130,9 +130,7 @@
             "type": "object",
             "properties": {
               "authenticity_token": {
-                "type": "string",
-                "description": "The authenticity token",
-                "example": "valid_token"
+                "$ref": "../components/schemas/AuthenticityToken.json"
               },
               "date": {
                 "type": "string",
@@ -150,7 +148,9 @@
               }
             },
             "required": [
-              "authenticity_token"
+              "authenticity_token",
+              "date",
+              "study_procedure_definition_identifiers"
             ],
             "additionalProperties": false
           }

@@ -254,9 +254,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "number": {
                     "type": "string",
@@ -446,9 +444,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "study_arm_id": {
                     "type": "integer",
@@ -645,9 +641,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "date": {
                     "type": "string",
@@ -665,7 +659,9 @@
                   }
                 },
                 "required": [
-                  "authenticity_token"
+                  "authenticity_token",
+                  "date",
+                  "study_procedure_definition_identifiers"
                 ],
                 "additionalProperties": false
               }
@@ -869,9 +865,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "date": {
                     "type": "string",
@@ -1196,6 +1190,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
                   "date": {
                     "type": "string",
                     "description": "The study procedure date",
@@ -1225,7 +1222,11 @@
                       }
                     }
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -1577,11 +1578,6 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
-                  },
                   "assets": {
                     "type": "array",
                     "description": "Asset IDs",
@@ -1589,10 +1585,13 @@
                       "type": "integer"
                     }
                   },
-                  "subject_number": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "reason_for_moving": {
                     "type": "string",
-                    "description": "The subject number",
-                    "example": "12345678"
+                    "description": "The reason for moving the assets",
+                    "example": "Mistake"
                   },
                   "study_event_identifier": {
                     "type": "string",
@@ -1604,19 +1603,19 @@
                     "description": "The study procedure identifier",
                     "example": "PROC1"
                   },
-                  "reason_for_moving": {
+                  "subject_number": {
                     "type": "string",
-                    "description": "The reason for moving the assets",
-                    "example": "Mistake"
+                    "description": "The subject number",
+                    "example": "12345678"
                   }
                 },
                 "required": [
-                  "authenticity_token",
                   "assets",
-                  "subject_number",
+                  "authenticity_token",
+                  "reason_for_moving",
                   "study_event_identifier",
                   "study_procedure_identifier",
-                  "reason_for_moving"
+                  "subject_number"
                 ],
                 "additionalProperties": false
               }
@@ -1725,27 +1724,39 @@
           }
         ],
         "requestBody": {
-          "description": "Asset position parameters",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "The asset id",
-                      "example": 1
-                    },
-                    "position": {
-                      "type": "integer",
-                      "description": "The asset position",
-                      "example": 1
+                "type": "object",
+                "properties": {
+                  "assets": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The asset id",
+                          "example": 1
+                        },
+                        "position": {
+                          "type": "integer",
+                          "description": "The asset position",
+                          "example": 1
+                        }
+                      }
                     }
+                  },
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   }
-                }
+                },
+                "required": [
+                  "assets",
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -1959,9 +1970,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "reason_for_creation": {
                     "type": "string",
@@ -1976,7 +1985,12 @@
                       "example": "test@gmail.com"
                     }
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "reason_for_creation"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -2096,9 +2110,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "reason_for_creation": {
                     "type": "string",
@@ -2118,7 +2130,11 @@
                       "example": "test@gmail.com"
                     }
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -2379,16 +2395,19 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The auth token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "completed": {
                     "type": "boolean",
                     "description": "The task being completed or not",
                     "example": true
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "completed"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -2610,16 +2629,19 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The auth token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "comment": {
                     "type": "string",
                     "description": "The comment",
                     "example": "comment"
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "comment"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -2729,16 +2751,19 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "upload_id": {
                     "type": "integer",
                     "description": "The upload id",
                     "example": 1
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "upload_id"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -2855,9 +2880,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "parts": {
                     "type": "array",
@@ -2882,7 +2905,13 @@
                     "description": "The upload id",
                     "example": 1
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "parts",
+                  "upload_id"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -3002,9 +3031,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "filename": {
                     "type": "string",
@@ -3016,7 +3043,13 @@
                     "description": "The filesize",
                     "example": 123456
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "filename",
+                  "filesize"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -3133,9 +3166,7 @@
                 "type": "object",
                 "properties": {
                   "authenticity_token": {
-                    "type": "string",
-                    "description": "The authenticity token",
-                    "example": "valid_token"
+                    "$ref": "#/components/schemas/AuthenticityToken"
                   },
                   "data": {
                     "type": "string",
@@ -3153,7 +3184,14 @@
                     "description": "The upload id",
                     "example": 1
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token",
+                  "data",
+                  "part_number",
+                  "upload_id"
+                ],
+                "additionalProperties": false
               }
             }
           }
@@ -4311,6 +4349,11 @@
           "status",
           "url"
         ]
+      },
+      "AuthenticityToken": {
+        "description": "The authenticity token",
+        "type": "string",
+        "example": "valid_token"
       }
     },
     "responses": {

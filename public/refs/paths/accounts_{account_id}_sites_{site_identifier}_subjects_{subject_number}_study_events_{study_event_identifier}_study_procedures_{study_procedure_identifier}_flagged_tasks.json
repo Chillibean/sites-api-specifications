@@ -71,9 +71,7 @@
             "type": "object",
             "properties": {
               "authenticity_token": {
-                "type": "string",
-                "description": "The authenticity token",
-                "example": "valid_token"
+                "$ref": "../components/schemas/AuthenticityToken.json"
               },
               "reason_for_creation": {
                 "type": "string",
@@ -88,7 +86,12 @@
                   "example": "test@gmail.com"
                 }
               }
-            }
+            },
+            "required": [
+              "authenticity_token",
+              "reason_for_creation"
+            ],
+            "additionalProperties": false
           }
         }
       }
