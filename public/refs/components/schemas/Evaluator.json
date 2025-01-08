@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "description": "An evaluator",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "The user id",
+      "example": 1
+    },
+    "email": {
+      "type": "string",
+      "description": "The email of the user",
+      "example": "test@user.com",
+      "format": "email"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "The first name of the user",
+      "example": "John"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "The last name of the user",
+      "example": "Doe"
+    },
+    "uuid": {
+      "type": "string",
+      "description": "The uuid of the user",
+      "example": "123e4567-e89b-12d3-a456-426655440000"
+    }
+  },
+  "nullable": true
+}
