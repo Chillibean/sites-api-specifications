@@ -1,0 +1,258 @@
+{
+  "get": {
+    "summary": "Get a study procedure",
+    "description": "Get a study procedure",
+    "operationId": "getStudyProcedure",
+    "tags": [
+      "Study Procedures"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../components/schemas/StudyProcedure.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  },
+  "put": {
+    "summary": "Update a study procedure",
+    "description": "Update a study procedure",
+    "operationId": "updateStudyProcedure",
+    "tags": [
+      "Study Procedures"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
+      }
+    ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              },
+              "date": {
+                "type": "string",
+                "description": "The study procedure date",
+                "example": "2023-12-21",
+                "nullable": true
+              },
+              "evaluator_id": {
+                "type": "integer",
+                "description": "The study procedure evaluator id",
+                "example": 1,
+                "nullable": true
+              },
+              "status": {
+                "type": "string",
+                "description": "The study procedure status",
+                "example": "in_progress",
+                "nullable": true
+              },
+              "form_template_fields": {
+                "type": "object",
+                "description": "The fields for a required form template",
+                "patternProperties": {
+                  "^[a-zA-Z0-9-]*$": {
+                    "type": "string",
+                    "description": "The field value",
+                    "example": "value"
+                  }
+                }
+              }
+            },
+            "required": [
+              "authenticity_token"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "schedule": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../components/schemas/StudyEvent.json"
+                  }
+                },
+                "study_procedure": {
+                  "$ref": "../components/schemas/StudyProcedure.json"
+                }
+              },
+              "required": [
+                "schedule",
+                "study_procedure"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}
