@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.0.0",
+    "version": "3.1.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -174,9 +174,6 @@
       },
       "FlaggedTask": {
         "$ref": "refs/components/schemas/FlaggedTask.json"
-      },
-      "PluralDisplay": {
-        "$ref": "refs/components/schemas/PluralDisplay.json"
       },
       "ProcedureFlaggedTaskNotifyDetails": {
         "$ref": "refs/components/schemas/ProcedureFlaggedTaskNotifyDetails.json"
