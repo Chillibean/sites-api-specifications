@@ -457,6 +457,16 @@
                     "description": "The study cohort id",
                     "example": 1,
                     "nullable": true
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "The subject number",
+                    "example": "12345678"
+                  },
+                  "reason_for_change": {
+                    "type": "string",
+                    "description": "The reason for change",
+                    "example": "Reason 1"
                   }
                 },
                 "required": [
