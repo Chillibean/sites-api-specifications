@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.0.0",
+    "version": "3.1.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -2141,6 +2141,7 @@
         },
         "responses": {
           "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3666,22 +3667,6 @@
           "notify_details"
         ],
         "additionalProperties": false
-      },
-      "PluralDisplay": {
-        "description": "Pluralised naming conventions",
-        "type": "object",
-        "properties": {
-          "plural": {
-            "description": "The plural name",
-            "type": "string",
-            "example": "visits"
-          },
-          "singular": {
-            "description": "The singular name",
-            "type": "string",
-            "example": "visit"
-          }
-        }
       },
       "ProcedureFlaggedTaskNotifyDetails": {
         "type": "object",

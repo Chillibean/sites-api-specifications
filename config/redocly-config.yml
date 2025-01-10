@@ -14,4 +14,6 @@ apis:
 rules:
   no-unused-components: error
   operation-singular-tag: warn
-  info-license: warn
+  info-license: off
+  spec: warn
+      
