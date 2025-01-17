@@ -1,10 +1,10 @@
 {
   "get": {
-    "summary": "Get a site for account",
-    "description": "Get a site for account",
-    "operationId": "getSite",
+    "summary": "Get all valid clinical evaluator for a study procedure",
+    "description": "Get all valid clinical evaluator for a study procedure",
+    "operationId": "getStudyProcedureClinicalEvaluators",
     "tags": [
-      "Sites"
+      "Study Procedure Clinical Evaluators"
     ],
     "security": [
       {
@@ -32,6 +32,36 @@
           "type": "string",
           "example": "SITE1"
         }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
       }
     ],
     "responses": {
@@ -40,7 +70,10 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/Site.json"
+              "type": "array",
+              "items": {
+                "$ref": "../components/schemas/SiteUser.json"
+              }
             }
           }
         }

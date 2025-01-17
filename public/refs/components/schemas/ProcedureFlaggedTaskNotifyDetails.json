@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "creation_users": {
+      "type": "array",
+      "description": "The users who created the flagged task",
+      "items": {
+        "$ref": "./User.json"
+      }
+    },
+    "resolving_users": {
+      "type": "array",
+      "description": "The users who resolved the flagged task",
+      "items": {
+        "$ref": "./User.json"
+      }
+    }
+  }
+}
