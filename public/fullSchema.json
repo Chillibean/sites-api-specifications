@@ -3741,10 +3741,21 @@
         "description": "A site",
         "type": "object",
         "properties": {
+          "anonymised_assets": {
+            "type": "boolean",
+            "description": "The anonymised assets indicator of site",
+            "example": true
+          },
           "country": {
             "type": "string",
             "description": "The country of site",
             "example": "GB"
+          },
+          "go_live_date": {
+            "type": "string",
+            "format": "date",
+            "description": "The go live date of site",
+            "example": "2020-01-01"
           },
           "id": {
             "type": "number",
@@ -3755,6 +3766,11 @@
             "type": "string",
             "description": "The identifier of site",
             "example": "SITE1"
+          },
+          "live": {
+            "type": "boolean",
+            "description": "The live indicator of site",
+            "example": true
           },
           "name": {
             "type": "string",
@@ -3777,35 +3793,19 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/StudyProtocol"
             }
-          },
-          "go_live_date": {
-            "type": "string",
-            "format": "date",
-            "description": "The go live date of site",
-            "example": "2020-01-01"
-          },
-          "is_live": {
-            "type": "boolean",
-            "description": "The live indicator of site",
-            "example": true
-          },
-          "anonymised_assets": {
-            "type": "boolean",
-            "description": "The anonymised assets indicator of site",
-            "example": true
           }
         },
         "additionalProperties": false,
         "required": [
+          "anonymised_assets",
           "country",
+          "go_live_date",
           "id",
           "identifier",
+          "live",
           "name",
           "permissions",
-          "study_protocol",
-          "go_live_date",
-          "is_live",
-          "anonymised_assets"
+          "study_protocol"
         ]
       },
       "SiteUser": {
