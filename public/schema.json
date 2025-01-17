@@ -7,6 +7,10 @@
     "contact": {
       "name": "ChilliPharm",
       "url": "https://www.chillipharm.com"
+    },
+    "license": {
+      "name": "UNLICENSED",
+      "url": "https://www.chillipharm.com"
     }
   },
   "tags": [
@@ -174,9 +178,6 @@
       },
       "FlaggedTask": {
         "$ref": "refs/components/schemas/FlaggedTask.json"
-      },
-      "PluralDisplay": {
-        "$ref": "refs/components/schemas/PluralDisplay.json"
       },
       "ProcedureFlaggedTaskNotifyDetails": {
         "$ref": "refs/components/schemas/ProcedureFlaggedTaskNotifyDetails.json"

@@ -7,6 +7,10 @@
     "contact": {
       "name": "ChilliPharm",
       "url": "https://www.chillipharm.com"
+    },
+    "license": {
+      "name": "UNLICENSED",
+      "url": "https://www.chillipharm.com"
     }
   },
   "servers": [
@@ -2141,6 +2145,7 @@
         },
         "responses": {
           "200": {
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -3667,22 +3672,6 @@
         ],
         "additionalProperties": false
       },
-      "PluralDisplay": {
-        "description": "Pluralised naming conventions",
-        "type": "object",
-        "properties": {
-          "plural": {
-            "description": "The plural name",
-            "type": "string",
-            "example": "visits"
-          },
-          "singular": {
-            "description": "The singular name",
-            "type": "string",
-            "example": "visit"
-          }
-        }
-      },
       "ProcedureFlaggedTaskNotifyDetails": {
         "type": "object",
         "properties": {
@@ -4378,22 +4367,11 @@
         }
       },
       "Forbidden": {
-        "description": "Forbidden. The request was valid, but the server is refusing action.",
+        "description": "Forbidden. Insufficient permissions to perform the operation.",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "description": "The error message",
-                  "example": "You do not have sufficient permission to perform this action",
-                  "enum": [
-                    "You do not have sufficient permission to perform this action",
-                    "Forbidden"
-                  ]
-                }
-              }
+              "$ref": "#/components/schemas/Error"
             }
           }
         }
@@ -4403,22 +4381,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "description": "An error",
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "description": "The error message",
-                  "example": "Not found",
-                  "enum": [
-                    "Not found"
-                  ]
-                }
-              },
-              "required": [
-                "error"
-              ],
-              "additionalProperties": false
+              "$ref": "#/components/schemas/Error"
             }
           }
         }
