@@ -1,0 +1,25 @@
+{
+  "description": "A role definition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The role definition id",
+      "type": "number",
+      "example": 1
+    },
+    "notify": {
+      "description": "Whether the role definition should be",
+      "type": "boolean",
+      "example": true
+    },
+    "role": {
+      "$ref": "./Role.json"
+    }
+  },
+  "required": [
+    "id",
+    "notify",
+    "role"
+  ],
+  "additionalProperties": false
+}

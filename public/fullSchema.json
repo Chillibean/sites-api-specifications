@@ -1,11 +1,15 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "2.0.7",
+    "version": "3.0.0",
     "title": "Sites API",
-    "description": "Sites API",
+    "description": "This is the api specifications for all things related to sites.",
     "contact": {
       "name": "ChilliPharm",
+      "url": "https://www.chillipharm.com"
+    },
+    "license": {
+      "name": "UNLICENSED",
       "url": "https://www.chillipharm.com"
     }
   },
@@ -13,6 +17,18 @@
     {
       "url": "http://chillipharm.test:3000/api/v1",
       "description": "Local development"
+    },
+    {
+      "url": "https://qa.chillipharm.dev/api/v1",
+      "description": "QA"
+    },
+    {
+      "url": "https://chillipharm-staging.com/api/v1",
+      "description": "Staging"
+    },
+    {
+      "url": "https://chillipharm-uat.com/api/v1",
+      "description": "UAT"
     },
     {
       "url": "https://www.chillipharm.com/api/v1",
@@ -25,8 +41,40 @@
       "description": "Endpoints for sites"
     },
     {
-      "name": "Users",
+      "name": "Site Users",
       "description": "Endpoints for site users"
+    },
+    {
+      "name": "Study Subjects",
+      "description": "Endpoints for Study Subjects"
+    },
+    {
+      "name": "Study Events",
+      "description": "Endpoints for Study Events"
+    },
+    {
+      "name": "Study Procedures",
+      "description": "Endpoints for Study Procedures"
+    },
+    {
+      "name": "Study Procedure Assets",
+      "description": "Endpoints for Study Procedure Assets"
+    },
+    {
+      "name": "Study Procedure Clinical Evaluators",
+      "description": "Endpoints for study procedure clinical evaluators"
+    },
+    {
+      "name": "Study Procedure Tasks",
+      "description": "Endpoints for study procedure tasks"
+    },
+    {
+      "name": "Study Procedure Updates",
+      "description": "Endpoints for study procedure updates"
+    },
+    {
+      "name": "Study Procedure Uploads",
+      "description": "Endpoints for uploading study procedure uploads"
     }
   ],
   "paths": {
@@ -40,9 +88,7 @@
         ],
         "security": [
           {
-            "userSessionKey": []
-          },
-          {
+            "userSessionKey": [],
             "chillipharmSession": []
           }
         ],
@@ -100,19 +146,3111 @@
         }
       }
     },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects": {
+      "get": {
+        "summary": "Get all study subjects for a site",
+        "description": "Get all subjects for a site",
+        "operationId": "getSubjects",
+        "tags": [
+          "Study Subjects"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Subjects is returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StudySubject"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a study subject for a site",
+        "description": "Create a study subject for a site",
+        "operationId": "createSubject",
+        "tags": [
+          "Study Subjects"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "The subject number",
+                    "example": "12345678"
+                  },
+                  "study_arm_id": {
+                    "type": "integer",
+                    "description": "The study arm id",
+                    "example": 1,
+                    "nullable": true
+                  },
+                  "study_cohort_id": {
+                    "type": "integer",
+                    "description": "The study cohort id",
+                    "example": 1,
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "number"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created a study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudySubject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}": {
+      "get": {
+        "summary": "Get a specific study subject for a site",
+        "description": "Get a specific study subject for a site",
+        "operationId": "getSubject",
+        "tags": [
+          "Study Subjects"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a specific study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudySubject"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a study subject for a site",
+        "description": "Update a study subject for a site",
+        "operationId": "updateSubject",
+        "tags": [
+          "Study Subjects"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "study_arm_id": {
+                    "type": "integer",
+                    "description": "The study arm id",
+                    "example": 1,
+                    "nullable": true
+                  },
+                  "study_cohort_id": {
+                    "type": "integer",
+                    "description": "The study cohort id",
+                    "example": 1,
+                    "nullable": true
+                  }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "schedule": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/StudyEvent"
+                      }
+                    },
+                    "subject": {
+                      "$ref": "#/components/schemas/StudySubject"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events": {
+      "get": {
+        "summary": "Get all study events for a study subject",
+        "description": "Get all study events for a study subject",
+        "operationId": "getStudyEvents",
+        "tags": [
+          "Study Events"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of all study events for a study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StudyEvent"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an unscheduled study event",
+        "description": "Create an unscheduled study event",
+        "operationId": "createUnscheduledStudyEvent",
+        "tags": [
+          "Study Events"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "The date this unscheduled study event took place",
+                    "example": "2024-01-03"
+                  },
+                  "study_procedure_definition_identifiers": {
+                    "type": "array",
+                    "description": "The procedures that took place during this unscheduled study event",
+                    "example": [
+                      "PROC1",
+                      "PROC2",
+                      "PROC3"
+                    ]
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "date",
+                  "study_procedure_definition_identifiers"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schedule": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/StudyEvent"
+                      }
+                    },
+                    "study_event": {
+                      "$ref": "#/components/schemas/StudyEvent"
+                    }
+                  },
+                  "required": [
+                    "schedule",
+                    "study_event"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}": {
+      "get": {
+        "summary": "Get a study event",
+        "description": "Get a study event",
+        "operationId": "getStudyEvent",
+        "tags": [
+          "Study Events"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a study event for a study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyEvent"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a study event",
+        "description": "Update a study event",
+        "operationId": "updateStudyEvent",
+        "tags": [
+          "Study Events"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "The date this study event took place",
+                    "example": "2024-01-03"
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "date"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schedule": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/StudyEvent"
+                      }
+                    },
+                    "study_event": {
+                      "$ref": "#/components/schemas/StudyEvent"
+                    }
+                  },
+                  "required": [
+                    "schedule",
+                    "study_event"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures": {
+      "get": {
+        "summary": "Get all study procedures for a study event",
+        "description": "Get all study procedures for a study event",
+        "operationId": "getStudyProcedures",
+        "tags": [
+          "Study Procedures"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StudyProcedure"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}": {
+      "get": {
+        "summary": "Get a study procedure",
+        "description": "Get a study procedure",
+        "operationId": "getStudyProcedure",
+        "tags": [
+          "Study Procedures"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyProcedure"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a study procedure",
+        "description": "Update a study procedure",
+        "operationId": "updateStudyProcedure",
+        "tags": [
+          "Study Procedures"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "The study procedure date",
+                    "example": "2023-12-21",
+                    "nullable": true
+                  },
+                  "evaluator_id": {
+                    "type": "integer",
+                    "description": "The study procedure evaluator id",
+                    "example": 1,
+                    "nullable": true
+                  },
+                  "status": {
+                    "type": "string",
+                    "description": "The study procedure status",
+                    "example": "in_progress",
+                    "nullable": true
+                  },
+                  "form_template_fields": {
+                    "type": "object",
+                    "description": "The fields for a required form template",
+                    "patternProperties": {
+                      "^[a-zA-Z0-9-]*$": {
+                        "type": "string",
+                        "description": "The field value",
+                        "example": "value"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schedule": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/StudyEvent"
+                      }
+                    },
+                    "study_procedure": {
+                      "$ref": "#/components/schemas/StudyProcedure"
+                    }
+                  },
+                  "required": [
+                    "schedule",
+                    "study_procedure"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets": {
+      "get": {
+        "summary": "Get all assets for a study procedure",
+        "description": "Get all assets for a study procedure",
+        "operationId": "getStudyProcedureAssets",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetShort"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/{asset_id}": {
+      "put": {
+        "summary": "Update an asset in a study procedure",
+        "description": "Update an asset in a study procedure",
+        "operationId": "updateStudyProcedureAsset",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "description": "The asset id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Asset update parameters",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "filename": {
+                    "type": "string",
+                    "description": "The asset filename",
+                    "example": "video.mp4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/move": {
+      "put": {
+        "summary": "Move assets between study procedures",
+        "description": "Move assets between study procedures",
+        "operationId": "moveStudyProcedureAssets",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assets": {
+                    "type": "array",
+                    "description": "Asset IDs",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "reason_for_moving": {
+                    "type": "string",
+                    "description": "The reason for moving the assets",
+                    "example": "Mistake"
+                  },
+                  "study_event_identifier": {
+                    "type": "string",
+                    "description": "The study event identifier",
+                    "example": "VISIT1"
+                  },
+                  "study_procedure_identifier": {
+                    "type": "string",
+                    "description": "The study procedure identifier",
+                    "example": "PROC1"
+                  },
+                  "subject_number": {
+                    "type": "string",
+                    "description": "The subject number",
+                    "example": "12345678"
+                  }
+                },
+                "required": [
+                  "assets",
+                  "authenticity_token",
+                  "reason_for_moving",
+                  "study_event_identifier",
+                  "study_procedure_identifier",
+                  "subject_number"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetShort"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/update_positions": {
+      "post": {
+        "summary": "Reorder the assets in a study procedure",
+        "description": "Reorder the assets in a study procedure",
+        "operationId": "reorderStudyProcedureAssets",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "assets": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "description": "The asset id",
+                          "example": 1
+                        },
+                        "position": {
+                          "type": "integer",
+                          "description": "The asset position",
+                          "example": 1
+                        }
+                      }
+                    }
+                  },
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  }
+                },
+                "required": [
+                  "assets",
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AssetShort"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/clinical_evaluators": {
+      "get": {
+        "summary": "Get all valid clinical evaluator for a study procedure",
+        "description": "Get all valid clinical evaluator for a study procedure",
+        "operationId": "getStudyProcedureClinicalEvaluators",
+        "tags": [
+          "Study Procedure Clinical Evaluators"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SiteUser"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/flagged_tasks": {
+      "post": {
+        "summary": "Create a flagged task",
+        "description": "This endpoint creates a flagged task for a study procedure",
+        "operationId": "createStudyProcedureFlaggedTask",
+        "tags": [
+          "Study Procedure Tasks"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "reason_for_creation": {
+                    "type": "string",
+                    "description": "The reason for flagging the task",
+                    "example": "Please update the asset names"
+                  },
+                  "notify_users_list": {
+                    "type": "array",
+                    "description": "The list of users to notify",
+                    "items": {
+                      "type": "string",
+                      "example": "test@gmail.com"
+                    }
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "reason_for_creation"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Task flagged successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlaggedTask"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/flagged_tasks/{task_id}": {
+      "put": {
+        "summary": "Update a flagged task",
+        "description": "Update a flagged task",
+        "operationId": "updateStudyProcedureFlaggedTask",
+        "tags": [
+          "Study Procedure Tasks"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The flagged task id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "e390325f-d528-4704-80ec-1dec0f317268"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "reason_for_creation": {
+                    "type": "string",
+                    "description": "The reason for flagging the task",
+                    "example": "Please update the asset names"
+                  },
+                  "reason_for_resolving": {
+                    "type": "string",
+                    "description": "The reason for resolving the task",
+                    "example": "This has been completed"
+                  },
+                  "notify_users_list": {
+                    "type": "array",
+                    "description": "The list of user emails to notify",
+                    "items": {
+                      "type": "string",
+                      "example": "test@gmail.com"
+                    }
+                  }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "flagged_tasks": {
+                      "items": {
+                        "$ref": "#/components/schemas/FlaggedTask"
+                      }
+                    },
+                    "flagged_tasks_complete": {
+                      "type": "boolean",
+                      "description": "Flagged tasks completed"
+                    },
+                    "all_tasks_complete": {
+                      "type": "boolean",
+                      "description": "All tasks completed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/tasks": {
+      "get": {
+        "summary": "Get all tasks for a study procedure",
+        "description": "Get all tasks for a study procedure",
+        "operationId": "getStudyProcedureTasks",
+        "tags": [
+          "Study Procedure Tasks"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Task"
+                      }
+                    },
+                    "flagged_tasks": {
+                      "type": "object",
+                      "properties": {
+                        "tasks": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/FlaggedTask"
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean",
+                          "description": "Whether all flagged tasks are completed",
+                          "example": true
+                        }
+                      }
+                    },
+                    "tasks_complete": {
+                      "type": "boolean",
+                      "description": "Whether all tasks are completed",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/tasks/{task_id}": {
+      "put": {
+        "summary": "Update a study procedure task",
+        "description": "Endpoint for updating study procedure task",
+        "operationId": "updateStudyProcedureTask",
+        "tags": [
+          "Study Procedure Tasks"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          },
+          {
+            "name": "task_id",
+            "in": "path",
+            "description": "The task id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "completed": {
+                    "type": "boolean",
+                    "description": "The task being completed or not",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "completed"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tasks": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Task"
+                      }
+                    },
+                    "tasks_complete": {
+                      "type": "boolean",
+                      "description": "Whether all tasks are completed",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates": {
+      "get": {
+        "summary": "Get all update records for a study procedure",
+        "description": "Get all update records for a study procedure",
+        "operationId": "getStudyProcedureUpdates",
+        "tags": [
+          "Study Procedure Updates"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StudyProcedureUpdate"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a study procedure update record",
+        "description": "Create a study procedure update record",
+        "operationId": "createStudyProcedureUpdate",
+        "tags": [
+          "Study Procedure Updates"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "comment": {
+                    "type": "string",
+                    "description": "The comment",
+                    "example": "comment"
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "comment"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyProcedureUpdate"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/abort_multipart": {
+      "delete": {
+        "summary": "Abort a multipart upload",
+        "description": "Abort a multipart upload",
+        "operationId": "abortUpload",
+        "tags": [
+          "Study Procedure Uploads"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "upload_id": {
+                    "type": "integer",
+                    "description": "The upload id",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "upload_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "upload_id": {
+                      "type": "integer",
+                      "description": "The upload id",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/complete_multipart": {
+      "post": {
+        "summary": "Complete a multipart upload",
+        "description": "Complete a multipart upload",
+        "operationId": "completeUpload",
+        "tags": [
+          "Study Procedure Uploads"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "parts": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "etag": {
+                          "type": "string",
+                          "description": "The etag",
+                          "example": "\"1234567890\""
+                        },
+                        "part_number": {
+                          "type": "integer",
+                          "description": "The part number",
+                          "example": 1
+                        }
+                      }
+                    }
+                  },
+                  "upload_id": {
+                    "type": "integer",
+                    "description": "The upload id",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "parts",
+                  "upload_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "asset": {
+                      "$ref": "#/components/schemas/Asset"
+                    },
+                    "status": {
+                      "type": "string",
+                      "description": "The status",
+                      "example": "success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/start_multipart": {
+      "post": {
+        "summary": "Start a multipart upload",
+        "description": "Start a multipart upload",
+        "operationId": "startUpload",
+        "tags": [
+          "Study Procedure Uploads"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "filename": {
+                    "type": "string",
+                    "description": "The filename",
+                    "example": "file.txt"
+                  },
+                  "filesize": {
+                    "type": "integer",
+                    "description": "The filesize",
+                    "example": 123456
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "filename",
+                  "filesize"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "upload_id": {
+                      "type": "integer",
+                      "description": "The upload id",
+                      "example": 1
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/upload_part": {
+      "post": {
+        "summary": "Upload a part of a multipart upload",
+        "description": "Upload a part of a multipart upload",
+        "operationId": "uploadPart",
+        "tags": [
+          "Study Procedure Uploads"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "data": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "The data to upload",
+                    "example": "data"
+                  },
+                  "part_number": {
+                    "type": "integer",
+                    "description": "The part number",
+                    "example": 1
+                  },
+                  "upload_id": {
+                    "type": "integer",
+                    "description": "The upload id",
+                    "example": 1
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "data",
+                  "part_number",
+                  "upload_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "etag": {
+                      "type": "string",
+                      "description": "The etag",
+                      "example": "\"1234567890\""
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/accounts/{account_id}/sites/{site_identifier}/users": {
       "get": {
         "summary": "Get users for site",
         "description": "Get users for site",
         "operationId": "getSiteUsers",
         "tags": [
-          "Users"
+          "Site Users"
         ],
         "security": [
           {
-            "userSessionKey": []
-          },
-          {
+            "userSessionKey": [],
             "chillipharmSession": []
           }
         ],
@@ -144,7 +3282,10 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SiteUsers"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SiteUser"
+                  }
                 }
               }
             }
@@ -187,6 +3328,226 @@
       }
     },
     "schemas": {
+      "Asset": {
+        "description": "An asset",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The asset id",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "description": "The asset title",
+            "example": "image.png"
+          },
+          "document_type": {
+            "type": "string",
+            "description": "The asset document type",
+            "example": "image"
+          },
+          "filename": {
+            "type": "string",
+            "description": "The asset filename",
+            "example": "image.png"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The asset created at date",
+            "example": "2024-03-27T15:46:56.845Z"
+          },
+          "extension": {
+            "type": "string",
+            "description": "The asset extension",
+            "example": "png"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/User"
+          },
+          "media_type": {
+            "type": "string",
+            "description": "The asset media type",
+            "example": "image"
+          },
+          "media": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "The links to the asset media",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The asset media url",
+                    "nullable": true,
+                    "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/image.png"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "url"
+                ]
+              },
+              {
+                "type": "object",
+                "description": "The links to the asset media",
+                "properties": {
+                  "sd_video": {
+                    "$ref": "#/components/schemas/VideoTranscode"
+                  },
+                  "hd_video": {
+                    "$ref": "#/components/schemas/VideoTranscode"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "sd_video",
+                  "hd_video"
+                ]
+              }
+            ]
+          },
+          "thumbnails": {
+            "type": "object",
+            "properties": {
+              "small": {
+                "type": "string",
+                "description": "The asset small thumbnail",
+                "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-small/image.png",
+                "nullable": true
+              },
+              "large": {
+                "type": "string",
+                "description": "The asset large thumbnail",
+                "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-large/image.png",
+                "nullable": true
+              }
+            }
+          },
+          "study_procedure_identifier": {
+            "type": "string",
+            "description": "The asset study procedure identifier",
+            "example": "NSTAR"
+          },
+          "study_event_identifier": {
+            "type": "string",
+            "description": "The asset study event identifier",
+            "example": "DAY1"
+          },
+          "subject_number": {
+            "type": "string",
+            "description": "The asset subject number",
+            "example": "E0001003"
+          },
+          "position": {
+            "type": "number",
+            "description": "The asset position",
+            "example": 16
+          },
+          "processed": {
+            "type": "boolean",
+            "description": "Is the asset processed",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "filename",
+          "created_at",
+          "extension",
+          "created_by",
+          "media_type",
+          "media",
+          "thumbnails",
+          "study_procedure_identifier",
+          "study_event_identifier",
+          "subject_number",
+          "position",
+          "processed"
+        ],
+        "additionalProperties": false
+      },
+      "AssetShort": {
+        "description": "An asset",
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "description": "The asset created at date",
+            "example": "2024-03-27T15:46:56.845Z"
+          },
+          "extension": {
+            "type": "string",
+            "description": "The asset extension",
+            "example": "png"
+          },
+          "filename": {
+            "type": "string",
+            "description": "The asset filename",
+            "example": "image.png"
+          },
+          "id": {
+            "type": "number",
+            "description": "The asset id",
+            "example": 1
+          },
+          "media_type": {
+            "type": "string",
+            "description": "The asset media type",
+            "example": "image"
+          },
+          "position": {
+            "type": "number",
+            "description": "The asset position",
+            "example": 16
+          },
+          "processed": {
+            "type": "boolean",
+            "description": "Is the asset processed",
+            "example": true
+          },
+          "thumbnails": {
+            "type": "object",
+            "properties": {
+              "small": {
+                "type": "string",
+                "description": "The asset small thumbnail",
+                "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-small/image.png",
+                "nullable": true
+              },
+              "large": {
+                "type": "string",
+                "description": "The asset large thumbnail",
+                "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-large/image.png",
+                "nullable": true
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "description": "The asset title",
+            "example": "image.png"
+          }
+        },
+        "required": [
+          "created_at",
+          "extension",
+          "filename",
+          "id",
+          "media_type",
+          "position",
+          "processed",
+          "thumbnails",
+          "title"
+        ],
+        "additionalProperties": false
+      },
+      "AuthenticityToken": {
+        "description": "The authenticity token",
+        "type": "string",
+        "example": "valid_token"
+      },
       "Error": {
         "description": "An error",
         "type": "object",
@@ -195,6 +3556,138 @@
             "type": "string",
             "description": "The error message",
             "example": "Bad request. Missing or invalid input parameters."
+          },
+          "fields": {
+            "type": "object",
+            "description": "The error fields",
+            "properties": {
+              "^.*$": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": {
+                  "name": [
+                    "can't be blank"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "Evaluator": {
+        "type": "object",
+        "description": "An evaluator",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The user id",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user",
+            "example": "test@user.com",
+            "format": "email"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The uuid of the user",
+            "example": "123e4567-e89b-12d3-a456-426655440000"
+          }
+        },
+        "nullable": true
+      },
+      "FlaggedTask": {
+        "description": "A flagged task",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The id of the flagged task",
+            "example": "e390325f-d528-4704-80ec-1dec0f317268"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The date the flagged task was created",
+            "example": "2024-01-02T10:52:00.000Z"
+          },
+          "completed_date": {
+            "type": "string",
+            "description": "The date the flagged task was completed",
+            "example": "2024-01-02T10:52:00.000Z",
+            "nullable": true
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/User"
+          },
+          "completed_by": {
+            "$ref": "#/components/schemas/User",
+            "nullable": true
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Whether the flagged task is locked",
+            "example": false
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Whether the flagged task is completed",
+            "example": true
+          },
+          "reason_for_creation": {
+            "type": "string",
+            "description": "The reason for creating the flagged task",
+            "example": "Please update the asset names (edit)"
+          },
+          "reason_for_resolving": {
+            "type": "string",
+            "description": "The reason for resolving the flagged task",
+            "example": "This has been completed",
+            "nullable": true
+          },
+          "notify_details": {
+            "$ref": "#/components/schemas/ProcedureFlaggedTaskNotifyDetails"
+          }
+        },
+        "required": [
+          "id",
+          "completed_date",
+          "completed_by",
+          "locked",
+          "completed",
+          "reason_for_creation",
+          "notify_details"
+        ],
+        "additionalProperties": false
+      },
+      "ProcedureFlaggedTaskNotifyDetails": {
+        "type": "object",
+        "properties": {
+          "creation_users": {
+            "type": "array",
+            "description": "The users who created the flagged task",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
+          },
+          "resolving_users": {
+            "type": "array",
+            "description": "The users who resolved the flagged task",
+            "items": {
+              "$ref": "#/components/schemas/User"
+            }
           }
         }
       },
@@ -218,6 +3711,31 @@
           "id",
           "name"
         ]
+      },
+      "RoleDefinition": {
+        "description": "A role definition",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The role definition id",
+            "type": "number",
+            "example": 1
+          },
+          "notify": {
+            "description": "Whether the role definition should be",
+            "type": "boolean",
+            "example": true
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          }
+        },
+        "required": [
+          "id",
+          "notify",
+          "role"
+        ],
+        "additionalProperties": false
       },
       "Site": {
         "description": "A site",
@@ -343,11 +3861,255 @@
           "uuid"
         ]
       },
-      "SiteUsers": {
-        "description": "A collection of site users",
-        "type": "array",
-        "items": {
-          "$ref": "#/components/schemas/SiteUser"
+      "StudyEvent": {
+        "description": "A scheduled event for a subject",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The event id",
+            "example": 1,
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "The date of the event",
+            "example": "2024-01-02",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The display name of the event",
+            "example": "Day 1"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the event",
+            "example": "DAY1"
+          },
+          "position": {
+            "type": "number",
+            "description": "The position of the event",
+            "example": 1,
+            "nullable": true
+          },
+          "procedures": {
+            "type": "array",
+            "description": "The procedures for the event",
+            "items": {
+              "$ref": "#/components/schemas/StudyProcedure"
+            }
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/StudyProtocol"
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the event",
+            "example": "complete",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "complete",
+              "requires_attention",
+              "not_required"
+            ]
+          },
+          "study_arm": {
+            "type": "string",
+            "description": "The study arm of the event",
+            "example": "Arm 1",
+            "nullable": true
+          },
+          "study_event_type": {
+            "type": "string",
+            "description": "The study event type of the event",
+            "example": "scheduled",
+            "enum": [
+              "scheduled",
+              "unscheduled"
+            ]
+          },
+          "contains_flagged_tasks": {
+            "type": "boolean",
+            "description": "Whether the event contains flagged tasks",
+            "example": true
+          },
+          "flagged_tasks_all_completed": {
+            "type": "boolean",
+            "description": "Whether all flagged tasks are completed",
+            "example": true
+          }
+        },
+        "required": [
+          "identifier",
+          "display_name",
+          "date",
+          "status",
+          "procedures",
+          "study_arm",
+          "protocol",
+          "study_event_type",
+          "position",
+          "contains_flagged_tasks",
+          "flagged_tasks_all_completed"
+        ],
+        "additionalProperties": false
+      },
+      "StudyProcedure": {
+        "description": "A procedure for an event",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The procedure id",
+            "example": 1,
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "description": "The date of the procedure",
+            "example": "2024-01-02",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The display name of the procedure",
+            "example": "North Star"
+          },
+          "evaluator": {
+            "$ref": "#/components/schemas/Evaluator"
+          },
+          "identifier": {
+            "type": "string",
+            "description": "The identifier of the procedure",
+            "example": "NSTAR"
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/StudyProtocol"
+          },
+          "role_definitions": {
+            "type": "array",
+            "description": "The role definitions of the procedure",
+            "items": {
+              "$ref": "#/components/schemas/RoleDefinition"
+            }
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "where the study procedure is locked",
+            "example": false
+          },
+          "status": {
+            "type": "string",
+            "description": "The status of the procedure",
+            "example": "complete",
+            "enum": [
+              "not_started",
+              "in_progress",
+              "complete",
+              "requires_attention",
+              "not_required"
+            ]
+          },
+          "required_form_id": {
+            "type": "array",
+            "description": "The required form ids",
+            "items": {
+              "type": "number"
+            }
+          },
+          "required_form_templates": {
+            "type": "array",
+            "description": "The required form templates",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "title": {
+                  "type": "string",
+                  "example": "Form 1"
+                },
+                "version_number": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "version_number"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "has_flagged_tasks": {
+            "type": "boolean",
+            "description": "Whether the procedure has flagged tasks",
+            "example": true
+          },
+          "flagged_tasks_completed": {
+            "type": "boolean",
+            "description": "Whether the flagged tasks are completed",
+            "example": true
+          }
+        },
+        "required": [
+          "id",
+          "identifier",
+          "display_name",
+          "date",
+          "evaluator",
+          "protocol",
+          "role_definitions",
+          "locked",
+          "status",
+          "required_form_id",
+          "required_form_templates",
+          "has_flagged_tasks",
+          "flagged_tasks_completed"
+        ],
+        "additionalProperties": false
+      },
+      "StudyProcedureUpdate": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The update id",
+            "example": "33437756-043f-4ed6-9a83-e692244fe301"
+          },
+          "created_at": {
+            "type": "string",
+            "description": "The update created date",
+            "example": "2024-01-02T10:52:05.000Z"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "action": {
+            "type": "string",
+            "description": "The update action",
+            "example": "posted_update"
+          },
+          "action_text": {
+            "type": "string",
+            "description": "The update action text",
+            "example": "posted an update"
+          },
+          "update_type": {
+            "type": "string",
+            "description": "The update type",
+            "example": "user_comment"
+          },
+          "update_message": {
+            "type": "string",
+            "description": "The update message",
+            "example": "update"
+          }
         }
       },
       "StudyProtocol": {
@@ -407,6 +4169,180 @@
           "plural",
           "singular"
         ]
+      },
+      "StudySubject": {
+        "description": "A subject",
+        "type": "object",
+        "properties": {
+          "cohort": {
+            "type": "string",
+            "description": "The study cohort of the subject",
+            "example": "Cohort 1",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "string",
+            "description": "Date time for when the subject was created",
+            "example": "2024-01-02T11:06:48.566Z"
+          },
+          "created_by": {
+            "type": "string",
+            "description": "Full name of subject creator",
+            "example": "John Doe"
+          },
+          "id": {
+            "type": "number",
+            "description": "The subject id",
+            "example": 1
+          },
+          "number": {
+            "type": "string",
+            "description": "The serial number of the subject",
+            "example": "E001004"
+          },
+          "study_arm": {
+            "type": "string",
+            "description": "The study arm the subject is currently in",
+            "example": "Arm 1",
+            "nullable": true
+          }
+        },
+        "required": [
+          "created_at",
+          "created_by",
+          "id",
+          "number"
+        ],
+        "additionalProperties": false
+      },
+      "Task": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The task id",
+            "example": "e390325f-d528-4704-80ec-1dec0f317267"
+          },
+          "completed_date": {
+            "type": "string",
+            "description": "The task completed date",
+            "example": "2024-01-02T10:52:00.000Z",
+            "nullable": true
+          },
+          "completed_by": {
+            "$ref": "#/components/schemas/User",
+            "nullable": true
+          },
+          "display_name": {
+            "type": "string",
+            "description": "The task display name",
+            "example": "task1"
+          },
+          "locked": {
+            "type": "boolean",
+            "description": "Whether the task is locked",
+            "example": false
+          },
+          "completed": {
+            "type": "boolean",
+            "description": "Whether the task is completed",
+            "example": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "completed_date",
+          "completed_by",
+          "display_name",
+          "locked",
+          "completed",
+          "roles"
+        ],
+        "additionalProperties": false
+      },
+      "User": {
+        "type": "object",
+        "description": "A User",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The user id",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "description": "The email of the user",
+            "example": "test@user.com",
+            "format": "email"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "The first name of the user",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "The last name of the user",
+            "example": "Doe"
+          },
+          "uuid": {
+            "type": "string",
+            "description": "The uuid of the user",
+            "example": "123e4567-e89b-12d3-a456-426655440000"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "first_name",
+          "last_name",
+          "uuid"
+        ],
+        "additionalProperties": false,
+        "nullable": true
+      },
+      "VideoTranscode": {
+        "type": "object",
+        "description": "The video transcode",
+        "properties": {
+          "frame_rate": {
+            "type": "string",
+            "nullable": true,
+            "description": "The video frame rate",
+            "example": "25"
+          },
+          "progress": {
+            "type": "string",
+            "nullable": true,
+            "description": "The video transcoding progress",
+            "example": "100"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true,
+            "description": "The video transcoding status",
+            "example": "complete"
+          },
+          "url": {
+            "type": "string",
+            "nullable": true,
+            "description": "The video url",
+            "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/video.mp4"
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "frame_rate",
+          "progress",
+          "status",
+          "url"
+        ]
       }
     },
     "responses": {
@@ -431,22 +4367,11 @@
         }
       },
       "Forbidden": {
-        "description": "Forbidden. The request was valid, but the server is refusing action.",
+        "description": "Forbidden. Insufficient permissions to perform the operation.",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "description": "The error message",
-                  "example": "You do not have sufficient permission to perform this action",
-                  "enum": [
-                    "You do not have sufficient permission to perform this action",
-                    "Forbidden"
-                  ]
-                }
-              }
+              "$ref": "#/components/schemas/Error"
             }
           }
         }
@@ -456,22 +4381,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "description": "An error",
-              "type": "object",
-              "properties": {
-                "error": {
-                  "type": "string",
-                  "description": "The error message",
-                  "example": "Not found",
-                  "enum": [
-                    "Not found"
-                  ]
-                }
-              },
-              "required": [
-                "error"
-              ],
-              "additionalProperties": false
+              "$ref": "#/components/schemas/Error"
             }
           }
         }

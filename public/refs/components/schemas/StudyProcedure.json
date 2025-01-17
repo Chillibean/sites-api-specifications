@@ -1,0 +1,114 @@
+{
+  "description": "A procedure for an event",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The procedure id",
+      "example": 1,
+      "nullable": true
+    },
+    "date": {
+      "type": "string",
+      "description": "The date of the procedure",
+      "example": "2024-01-02",
+      "nullable": true
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The display name of the procedure",
+      "example": "North Star"
+    },
+    "evaluator": {
+      "$ref": "./Evaluator.json"
+    },
+    "identifier": {
+      "type": "string",
+      "description": "The identifier of the procedure",
+      "example": "NSTAR"
+    },
+    "protocol": {
+      "$ref": "./StudyProtocol.json"
+    },
+    "role_definitions": {
+      "type": "array",
+      "description": "The role definitions of the procedure",
+      "items": {
+        "$ref": "./RoleDefinition.json"
+      }
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "where the study procedure is locked",
+      "example": false
+    },
+    "status": {
+      "type": "string",
+      "description": "The status of the procedure",
+      "example": "complete",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "complete",
+        "requires_attention",
+        "not_required"
+      ]
+    },
+    "required_form_id": {
+      "type": "array",
+      "description": "The required form ids",
+      "items": {
+        "type": "number"
+      }
+    },
+    "required_form_templates": {
+      "type": "array",
+      "description": "The required form templates",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "title": {
+            "type": "string",
+            "example": "Form 1"
+          },
+          "version_number": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": ["id", "title", "version_number"],
+        "additionalProperties": false
+      }
+    },
+    "has_flagged_tasks": {
+      "type": "boolean",
+      "description": "Whether the procedure has flagged tasks",
+      "example": true
+    },
+    "flagged_tasks_completed": {
+      "type": "boolean",
+      "description": "Whether the flagged tasks are completed",
+      "example": true
+    }
+  },
+  "required": [
+    "id",
+    "identifier",
+    "display_name",
+    "date",
+    "evaluator",
+    "protocol",
+    "role_definitions",
+    "locked",
+    "status",
+    "required_form_id",
+    "required_form_templates",
+    "has_flagged_tasks",
+    "flagged_tasks_completed"
+  ],
+  "additionalProperties": false
+}
