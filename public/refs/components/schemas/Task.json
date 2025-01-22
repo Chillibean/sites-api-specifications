@@ -1,0 +1,51 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The task id",
+      "example": "e390325f-d528-4704-80ec-1dec0f317267"
+    },
+    "completed_date": {
+      "type": "string",
+      "description": "The task completed date",
+      "example": "2024-01-02T10:52:00.000Z",
+      "nullable": true
+    },
+    "completed_by": {
+      "$ref": "./User.json",
+      "nullable": true
+    },
+    "display_name": {
+      "type": "string",
+      "description": "The task display name",
+      "example": "task1"
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "Whether the task is locked",
+      "example": false
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether the task is completed",
+      "example": true
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "./Role.json"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "completed_date",
+    "completed_by",
+    "display_name",
+    "locked",
+    "completed",
+    "roles"
+  ],
+  "additionalProperties": false
+}

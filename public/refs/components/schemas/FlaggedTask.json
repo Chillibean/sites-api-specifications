@@ -1,0 +1,63 @@
+{
+  "description": "A flagged task",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The id of the flagged task",
+      "example": "e390325f-d528-4704-80ec-1dec0f317268"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The date the flagged task was created",
+      "example": "2024-01-02T10:52:00.000Z"
+    },
+    "completed_date": {
+      "type": "string",
+      "description": "The date the flagged task was completed",
+      "example": "2024-01-02T10:52:00.000Z",
+      "nullable": true
+    },
+    "created_by": {
+      "$ref": "./User.json"
+    },
+    "completed_by": {
+      "$ref": "./User.json",
+      "nullable": true
+    },
+    "locked": {
+      "type": "boolean",
+      "description": "Whether the flagged task is locked",
+      "example": false
+    },
+    "completed": {
+      "type": "boolean",
+      "description": "Whether the flagged task is completed",
+      "example": true
+    },
+    "reason_for_creation": {
+      "type": "string",
+      "description": "The reason for creating the flagged task",
+      "example": "Please update the asset names (edit)"
+    },
+    "reason_for_resolving": {
+      "type": "string",
+      "description": "The reason for resolving the flagged task",
+      "example": "This has been completed",
+      "nullable": true
+    },
+    "notify_details": {
+      "$ref": "./ProcedureFlaggedTaskNotifyDetails.json"
+    }
+  },
+  "required": [
+    "id",
+    "completed_date",
+    "completed_by",
+    "locked",
+    "completed",
+    "reason_for_creation",
+    "notify_details"
+  ],
+  "additionalProperties": false
+}
