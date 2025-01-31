@@ -4211,13 +4211,25 @@
             "description": "The study arm the subject is currently in",
             "example": "Arm 1",
             "nullable": true
+          },
+          "any_study_events_exist": {
+            "type": "boolean",
+            "description": "Indicates if any study events exist for the subject",
+            "example": true
+          },
+          "any_study_events_completed": {
+            "type": "boolean",
+            "description": "Indicates if any study events have been completed for the subject",
+            "example": true
           }
         },
         "required": [
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "any_study_events_exist",
+          "any_study_events_completed"
         ],
         "additionalProperties": false
       },
