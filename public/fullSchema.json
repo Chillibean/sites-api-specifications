@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.0.0",
+    "version": "3.1.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -461,6 +461,16 @@
                     "description": "The study cohort id",
                     "example": 1,
                     "nullable": true
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "The subject number",
+                    "example": "12345678"
+                  },
+                  "reason_for_change": {
+                    "type": "string",
+                    "description": "The reason for change",
+                    "example": "Reason 1"
                   }
                 },
                 "required": [
@@ -4205,13 +4215,25 @@
             "description": "The study arm the subject is currently in",
             "example": "Arm 1",
             "nullable": true
+          },
+          "any_study_events_exist": {
+            "type": "boolean",
+            "description": "Indicates if any study events exist for the subject",
+            "example": true
+          },
+          "any_study_events_completed": {
+            "type": "boolean",
+            "description": "Indicates if any study events have been completed for the subject",
+            "example": true
           }
         },
         "required": [
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "any_study_events_exist",
+          "any_study_events_completed"
         ],
         "additionalProperties": false
       },
