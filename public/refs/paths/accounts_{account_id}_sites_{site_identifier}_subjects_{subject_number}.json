@@ -247,11 +247,6 @@
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "number": {
-                "type": "string",
-                "description": "The subject number",
-                "example": "12345678"
-              },
               "reason_for_deleting": {
                 "type": "string",
                 "description": "The reason for deleting",
