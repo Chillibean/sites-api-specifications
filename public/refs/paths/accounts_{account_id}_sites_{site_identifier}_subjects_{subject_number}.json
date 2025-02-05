@@ -270,9 +270,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "properties": {
-                "$ref": "../components/schemas/StudySubject.json"
-              }
+              "$ref": "../components/schemas/StudySubject.json"
             }
           }
         }

@@ -597,63 +597,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "description": "A subject",
-                    "type": "object",
-                    "properties": {
-                      "cohort": {
-                        "type": "string",
-                        "description": "The study cohort of the subject",
-                        "example": "Cohort 1",
-                        "nullable": true
-                      },
-                      "created_at": {
-                        "type": "string",
-                        "description": "Date time for when the subject was created",
-                        "example": "2024-01-02T11:06:48.566Z"
-                      },
-                      "created_by": {
-                        "type": "string",
-                        "description": "Full name of subject creator",
-                        "example": "John Doe"
-                      },
-                      "id": {
-                        "type": "number",
-                        "description": "The subject id",
-                        "example": 1
-                      },
-                      "number": {
-                        "type": "string",
-                        "description": "The serial number of the subject",
-                        "example": "E001004"
-                      },
-                      "study_arm": {
-                        "type": "string",
-                        "description": "The study arm the subject is currently in",
-                        "example": "Arm 1",
-                        "nullable": true
-                      },
-                      "any_study_events_exist": {
-                        "type": "boolean",
-                        "description": "Indicates if any study events exist for the subject",
-                        "example": true
-                      },
-                      "any_study_events_completed": {
-                        "type": "boolean",
-                        "description": "Indicates if any study events have been completed for the subject",
-                        "example": true
-                      }
-                    },
-                    "required": [
-                      "created_at",
-                      "created_by",
-                      "id",
-                      "number",
-                      "any_study_events_exist",
-                      "any_study_events_completed"
-                    ],
-                    "additionalProperties": false
-                  }
+                  "$ref": "#/components/schemas/StudySubject"
                 }
               }
             }
