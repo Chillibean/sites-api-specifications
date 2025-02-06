@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.1.0",
+    "version": "3.1.1",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -74,6 +74,9 @@
     }
   ],
   "paths": {
+    "/accounts/{account_id}/sites": {
+      "$ref": "refs/paths/accounts_{account_id}_sites.json"
+    },
     "/accounts/{account_id}/sites/{site_identifier}": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}.json"
     },
