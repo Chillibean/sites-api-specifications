@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.1.0",
+    "version": "3.1.1",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -74,6 +74,67 @@
     }
   ],
   "paths": {
+    "/accounts/{account_id}/sites": {
+      "get": {
+        "summary": "Get a list of sites for account",
+        "description": "Get a list of sites for account",
+        "operationId": "getSites",
+        "tags": [
+          "Sites"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SitesPrototype"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
     "/accounts/{account_id}/sites/{site_identifier}": {
       "get": {
         "summary": "Get a site for account",
@@ -4360,6 +4421,35 @@
           "progress",
           "status",
           "url"
+        ]
+      },
+      "SitesPrototype": {
+        "description": "A site",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "The id of site",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of site",
+            "example": "Site 1"
+          },
+          "study_procedures": {
+            "type": "array",
+            "description": "The study procedures",
+            "items": {
+              "$ref": "#/components/schemas/StudyProcedure"
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "name",
+          "study_procedures"
         ]
       }
     },
