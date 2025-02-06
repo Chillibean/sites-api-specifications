@@ -1,0 +1,29 @@
+{
+  "description": "A site",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The id of site",
+      "example": 1
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of site",
+      "example": "Site 1"
+    },
+    "study_procedures": {
+      "type": "array",
+      "description": "The study procedures",
+      "items": {
+        "$ref": "./StudyProcedure.json"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "study_procedures"
+  ]
+}

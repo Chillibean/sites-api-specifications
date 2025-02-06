@@ -74,6 +74,9 @@
     }
   ],
   "paths": {
+    "/accounts/{account_id}/sites": {
+      "$ref": "refs/paths/accounts_{account_id}_sites.json"
+    },
     "/accounts/{account_id}/sites/{site_identifier}": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_identifier}.json"
     },
