@@ -194,5 +194,100 @@
         "$ref": "../components/responses/InternalServerError.json"
       }
     }
+  },
+  "delete": {
+    "summary": "Delete a study subject for a site",
+    "description": "Delete a study subject for a site",
+    "operationId": "deleteSubject",
+    "tags": ["Study Subjects"],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_identifier",
+        "in": "path",
+        "description": "The site identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              },
+              "reason_for_deleting": {
+                "type": "string",
+                "description": "The reason for deleting",
+                "example": "Mistake"
+              }
+            },
+            "required": ["authenticity_token"],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Delete study subject",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../components/schemas/StudySubject.json"
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
   }
 }
