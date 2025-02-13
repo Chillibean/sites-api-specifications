@@ -3,22 +3,7 @@
   "content": {
     "application/json": {
       "schema": {
-        "description": "An error",
-        "type": "object",
-        "properties": {
-          "error": {
-            "type": "string",
-            "description": "The error message",
-            "example": "Not Found",
-            "enum": [
-              "Not Found"
-            ]
-          }
-        },
-        "required": [
-          "error"
-        ],
-        "additionalProperties": false
+        "$ref": "../schemas/Error.json"
       }
     }
   }
