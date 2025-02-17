@@ -146,6 +146,11 @@
                 "type": "string",
                 "description": "The reason for change",
                 "example": "Reason 1"
+              },
+              "active": {
+                "type": "boolean",
+                "description": "The active status",
+                "example": true
               }
             },
             "required": ["authenticity_token"],

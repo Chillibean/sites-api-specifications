@@ -471,6 +471,11 @@
                     "type": "string",
                     "description": "The reason for change",
                     "example": "Reason 1"
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "description": "The active status",
+                    "example": true
                   }
                 },
                 "required": [
@@ -4324,6 +4329,11 @@
             "type": "boolean",
             "description": "Indicates if any study events have been completed for the subject",
             "example": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Indicates if the subject is active",
+            "example": true
           }
         },
         "required": [
@@ -4332,7 +4342,8 @@
           "id",
           "number",
           "any_study_events_exist",
-          "any_study_events_completed"
+          "any_study_events_completed",
+          "active"
         ],
         "additionalProperties": false
       },
