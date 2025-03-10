@@ -1,0 +1,75 @@
+{
+  "description": "An asset",
+  "type": "object",
+  "properties": {
+    "created_at": {
+      "type": "string",
+      "description": "The asset created at date",
+      "example": "2024-03-27T15:46:56.845Z"
+    },
+    "extension": {
+      "type": "string",
+      "description": "The asset extension",
+      "example": "png"
+    },
+    "filename": {
+      "type": "string",
+      "description": "The asset filename",
+      "example": "image.png"
+    },
+    "id": {
+      "type": "number",
+      "description": "The asset id",
+      "example": 1
+    },
+    "media_type": {
+      "type": "string",
+      "description": "The asset media type",
+      "example": "image"
+    },
+    "position": {
+      "type": "number",
+      "description": "The asset position",
+      "example": 16
+    },
+    "processed": {
+      "type": "boolean",
+      "description": "Is the asset processed",
+      "example": true
+    },
+    "thumbnails": {
+      "type": "object",
+      "properties": {
+        "small": {
+          "type": "string",
+          "description": "The asset small thumbnail",
+          "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-small/image.png",
+          "nullable": true
+        },
+        "large": {
+          "type": "string",
+          "description": "The asset large thumbnail",
+          "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-large/image.png",
+          "nullable": true
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "description": "The asset title",
+      "example": "image.png"
+    }
+  },
+  "required": [
+    "created_at",
+    "extension",
+    "filename",
+    "id",
+    "media_type",
+    "position",
+    "processed",
+    "thumbnails",
+    "title"
+  ],
+  "additionalProperties": false
+}
