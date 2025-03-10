@@ -1,0 +1,140 @@
+{
+  "description": "An asset",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "The asset id",
+      "example": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "The asset title",
+      "example": "image.png"
+    },
+    "document_type": {
+      "type": "string",
+      "description": "The asset document type",
+      "example": "image"
+    },
+    "filename": {
+      "type": "string",
+      "description": "The asset filename",
+      "example": "image.png"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The asset created at date",
+      "example": "2024-03-27T15:46:56.845Z"
+    },
+    "extension": {
+      "type": "string",
+      "description": "The asset extension",
+      "example": "png"
+    },
+    "created_by": {
+      "$ref": "./User.json"
+    },
+    "media_type": {
+      "type": "string",
+      "description": "The asset media type",
+      "example": "image"
+    },
+    "media": {
+      "oneOf": [
+        {
+          "type": "object",
+          "description": "The links to the asset media",
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "The asset media url",
+              "nullable": true,
+              "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/image.png"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "url"
+          ]
+        },
+        {
+          "type": "object",
+          "description": "The links to the asset media",
+          "properties": {
+            "sd_video": {
+              "$ref": "./VideoTranscode.json"
+            },
+            "hd_video": {
+              "$ref": "./VideoTranscode.json"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "sd_video",
+            "hd_video"
+          ]
+        }
+      ]
+    },
+    "thumbnails": {
+      "type": "object",
+      "properties": {
+        "small": {
+          "type": "string",
+          "description": "The asset small thumbnail",
+          "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-small/image.png",
+          "nullable": true
+        },
+        "large": {
+          "type": "string",
+          "description": "The asset large thumbnail",
+          "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/thumbnails-large/image.png",
+          "nullable": true
+        }
+      }
+    },
+    "study_procedure_identifier": {
+      "type": "string",
+      "description": "The asset study procedure identifier",
+      "example": "NSTAR"
+    },
+    "study_event_identifier": {
+      "type": "string",
+      "description": "The asset study event identifier",
+      "example": "DAY1"
+    },
+    "subject_number": {
+      "type": "string",
+      "description": "The asset subject number",
+      "example": "E0001003"
+    },
+    "position": {
+      "type": "number",
+      "description": "The asset position",
+      "example": 16
+    },
+    "processed": {
+      "type": "boolean",
+      "description": "Is the asset processed",
+      "example": true
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "filename",
+    "created_at",
+    "extension",
+    "created_by",
+    "media_type",
+    "media",
+    "thumbnails",
+    "study_procedure_identifier",
+    "study_event_identifier",
+    "subject_number",
+    "position",
+    "processed"
+  ],
+  "additionalProperties": false
+}

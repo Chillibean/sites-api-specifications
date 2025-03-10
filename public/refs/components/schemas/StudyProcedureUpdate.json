@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The update id",
+      "example": "33437756-043f-4ed6-9a83-e692244fe301"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "The update created date",
+      "example": "2024-01-02T10:52:05.000Z"
+    },
+    "user": {
+      "$ref": "./User.json"
+    },
+    "action": {
+      "type": "string",
+      "description": "The update action",
+      "example": "posted_update"
+    },
+    "action_text": {
+      "type": "string",
+      "description": "The update action text",
+      "example": "posted an update"
+    },
+    "update_type": {
+      "type": "string",
+      "description": "The update type",
+      "example": "user_comment"
+    },
+    "update_message": {
+      "type": "string",
+      "description": "The update message",
+      "example": "update"
+    }
+  }
+}
