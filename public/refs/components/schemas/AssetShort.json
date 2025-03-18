@@ -52,7 +52,11 @@
                   "description": "The asset hd video status",
                   "example": "pending"
                 }
-              }
+              },
+              "additionalProperties": false,
+              "required": [
+                "status"
+              ]
             },
             "sd_video": {
               "type":"object",
@@ -63,7 +67,11 @@
                   "description": "The asset sd video status",
                   "example": "pending"
                 }
-              }
+              },
+              "additionalProperties": false,
+              "required": [
+                "status"
+              ]
             }
           },
           "additionalProperties": false,
