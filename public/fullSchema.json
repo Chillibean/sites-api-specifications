@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.0.0",
+    "version": "3.2.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -461,6 +461,21 @@
                     "description": "The study cohort id",
                     "example": 1,
                     "nullable": true
+                  },
+                  "number": {
+                    "type": "string",
+                    "description": "The subject number",
+                    "example": "12345678"
+                  },
+                  "reason_for_change": {
+                    "type": "string",
+                    "description": "The reason for change",
+                    "example": "Reason 1"
+                  },
+                  "active": {
+                    "type": "boolean",
+                    "description": "The active status",
+                    "example": true
                   }
                 },
                 "required": [
@@ -488,6 +503,105 @@
                       "$ref": "#/components/schemas/StudySubject"
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a study subject for a site",
+        "description": "Delete a study subject for a site",
+        "operationId": "deleteSubject",
+        "tags": [
+          "Study Subjects"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "reason_for_deleting": {
+                    "type": "string",
+                    "description": "The reason for deleting",
+                    "example": "Mistake"
+                  }
+                },
+                "required": [
+                  "authenticity_token"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Delete study subject",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudySubject"
                 }
               }
             }
@@ -4205,13 +4319,31 @@
             "description": "The study arm the subject is currently in",
             "example": "Arm 1",
             "nullable": true
+          },
+          "any_study_events_exist": {
+            "type": "boolean",
+            "description": "Indicates if any study events exist for the subject",
+            "example": true
+          },
+          "any_study_events_completed": {
+            "type": "boolean",
+            "description": "Indicates if any study events have been completed for the subject",
+            "example": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Indicates if the subject is active",
+            "example": true
           }
         },
         "required": [
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "any_study_events_exist",
+          "any_study_events_completed",
+          "active"
         ],
         "additionalProperties": false
       },
