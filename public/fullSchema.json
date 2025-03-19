@@ -3606,6 +3606,66 @@
             "description": "The asset id",
             "example": 1
           },
+          "media": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "The links to the asset media",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The asset media url",
+                    "nullable": true,
+                    "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/image.png"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "url"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "hd_video": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "nullable": true,
+                        "type": "string",
+                        "description": "The asset hd video status",
+                        "example": "pending"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "status"
+                    ]
+                  },
+                  "sd_video": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "nullable": true,
+                        "type": "string",
+                        "description": "The asset sd video status",
+                        "example": "pending"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "status"
+                    ]
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "hd_video",
+                  "sd_video"
+                ]
+              }
+            ]
+          },
           "media_type": {
             "type": "string",
             "description": "The asset media type",
