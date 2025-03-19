@@ -3709,6 +3709,7 @@
           "extension",
           "filename",
           "id",
+          "media",
           "media_type",
           "position",
           "processed",
