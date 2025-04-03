@@ -1,11 +1,9 @@
 {
-  "post": {
-    "summary": "Reorder the assets in a study procedure",
-    "description": "Reorder the assets in a study procedure",
-    "operationId": "reorderStudyProcedureAssets",
-    "tags": [
-      "Study Procedure Assets"
-    ],
+  "put": {
+    "summary": "Update an asset in a study procedure",
+    "description": "Update an asset in a study procedure",
+    "operationId": "updateStudyProcedureAsset",
+    "tags": ["Study Procedure Assets"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -62,42 +60,32 @@
           "type": "string",
           "example": "PROC1"
         }
+      },
+      {
+        "name": "asset_id",
+        "in": "path",
+        "description": "The asset id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
       }
     ],
     "requestBody": {
+      "description": "Asset update parameters",
       "required": true,
       "content": {
         "application/json": {
           "schema": {
             "type": "object",
             "properties": {
-              "assets": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "id": {
-                      "type": "integer",
-                      "description": "The asset id",
-                      "example": 1
-                    },
-                    "position": {
-                      "type": "integer",
-                      "description": "The asset position",
-                      "example": 1
-                    }
-                  }
-                }
-              },
-              "authenticity_token": {
-                "$ref": "../components/schemas/AuthenticityToken.json"
+              "filename": {
+                "type": "string",
+                "description": "The asset filename",
+                "example": "video.mp4"
               }
-            },
-            "required": [
-              "assets",
-              "authenticity_token"
-            ],
-            "additionalProperties": false
+            }
           }
         }
       }
@@ -108,10 +96,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "../components/schemas/AssetShort.json"
-              }
+              "$ref": "../components/schemas/Asset.json"
             }
           }
         }

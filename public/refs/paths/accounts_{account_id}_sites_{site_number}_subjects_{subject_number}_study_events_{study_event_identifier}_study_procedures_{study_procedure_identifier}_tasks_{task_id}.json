@@ -1,11 +1,9 @@
 {
-  "post": {
-    "summary": "Start a multipart upload",
-    "description": "Start a multipart upload",
-    "operationId": "startUpload",
-    "tags": [
-      "Study Procedure Uploads"
-    ],
+  "put": {
+    "summary": "Update a study procedure task",
+    "description": "Endpoint for updating study procedure task",
+    "operationId": "updateStudyProcedureTask",
+    "tags": ["Study Procedure Tasks"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -62,6 +60,16 @@
           "type": "string",
           "example": "PROC1"
         }
+      },
+      {
+        "name": "task_id",
+        "in": "path",
+        "description": "The task id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
       }
     ],
     "requestBody": {
@@ -73,39 +81,36 @@
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "filename": {
-                "type": "string",
-                "description": "The filename",
-                "example": "file.txt"
-              },
-              "filesize": {
-                "type": "integer",
-                "description": "The filesize",
-                "example": 123456
+              "completed": {
+                "type": "boolean",
+                "description": "The task being completed or not",
+                "example": true
               }
             },
-            "required": [
-              "authenticity_token",
-              "filename",
-              "filesize"
-            ],
+            "required": ["authenticity_token", "completed"],
             "additionalProperties": false
           }
         }
       }
     },
     "responses": {
-      "201": {
+      "200": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
               "type": "object",
               "properties": {
-                "upload_id": {
-                  "type": "integer",
-                  "description": "The upload id",
-                  "example": 1
+                "tasks": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "../components/schemas/Task.json"
+                  }
+                },
+                "tasks_complete": {
+                  "type": "boolean",
+                  "description": "Whether all tasks are completed",
+                  "example": true
                 }
               }
             }

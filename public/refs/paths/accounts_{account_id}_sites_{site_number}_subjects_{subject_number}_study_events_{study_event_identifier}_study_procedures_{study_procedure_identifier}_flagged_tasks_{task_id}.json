@@ -1,11 +1,9 @@
 {
   "put": {
-    "summary": "Update an asset in a study procedure",
-    "description": "Update an asset in a study procedure",
-    "operationId": "updateStudyProcedureAsset",
-    "tags": [
-      "Study Procedure Assets"
-    ],
+    "summary": "Update a flagged task",
+    "description": "Update a flagged task",
+    "operationId": "updateStudyProcedureFlaggedTask",
+    "tags": ["Study Procedure Tasks"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -64,30 +62,46 @@
         }
       },
       {
-        "name": "asset_id",
+        "name": "task_id",
         "in": "path",
-        "description": "The asset id",
+        "description": "The flagged task id",
         "required": true,
         "schema": {
           "type": "string",
-          "example": "1"
+          "example": "e390325f-d528-4704-80ec-1dec0f317268"
         }
       }
     ],
     "requestBody": {
-      "description": "Asset update parameters",
-      "required": true,
       "content": {
         "application/json": {
           "schema": {
             "type": "object",
             "properties": {
-              "filename": {
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              },
+              "reason_for_creation": {
                 "type": "string",
-                "description": "The asset filename",
-                "example": "video.mp4"
+                "description": "The reason for flagging the task",
+                "example": "Please update the asset names"
+              },
+              "reason_for_resolving": {
+                "type": "string",
+                "description": "The reason for resolving the task",
+                "example": "This has been completed"
+              },
+              "notify_users_list": {
+                "type": "array",
+                "description": "The list of user emails to notify",
+                "items": {
+                  "type": "string",
+                  "example": "test@gmail.com"
+                }
               }
-            }
+            },
+            "required": ["authenticity_token"],
+            "additionalProperties": false
           }
         }
       }
@@ -98,7 +112,22 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/Asset.json"
+              "type": "object",
+              "properties": {
+                "flagged_tasks": {
+                  "items": {
+                    "$ref": "../components/schemas/FlaggedTask.json"
+                  }
+                },
+                "flagged_tasks_complete": {
+                  "type": "boolean",
+                  "description": "Flagged tasks completed"
+                },
+                "all_tasks_complete": {
+                  "type": "boolean",
+                  "description": "All tasks completed"
+                }
+              }
             }
           }
         }

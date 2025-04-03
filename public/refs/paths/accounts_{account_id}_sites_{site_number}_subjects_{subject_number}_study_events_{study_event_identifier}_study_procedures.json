@@ -1,10 +1,10 @@
 {
-  "delete": {
-    "summary": "Abort a multipart upload",
-    "description": "Abort a multipart upload",
-    "operationId": "abortUpload",
+  "get": {
+    "summary": "Get all study procedures for a study event",
+    "description": "Get all study procedures for a study event",
+    "operationId": "getStudyProcedures",
     "tags": [
-      "Study Procedure Uploads"
+      "Study Procedures"
     ],
     "security": [
       {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -52,55 +52,17 @@
           "type": "string",
           "example": "VISIT1"
         }
-      },
-      {
-        "name": "study_procedure_identifier",
-        "in": "path",
-        "description": "The study procedure identifier",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "PROC1"
-        }
       }
     ],
-    "requestBody": {
-      "content": {
-        "application/json": {
-          "schema": {
-            "type": "object",
-            "properties": {
-              "authenticity_token": {
-                "$ref": "../components/schemas/AuthenticityToken.json"
-              },
-              "upload_id": {
-                "type": "integer",
-                "description": "The upload id",
-                "example": 1
-              }
-            },
-            "required": [
-              "authenticity_token",
-              "upload_id"
-            ],
-            "additionalProperties": false
-          }
-        }
-      }
-    },
     "responses": {
       "200": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "upload_id": {
-                  "type": "integer",
-                  "description": "The upload id",
-                  "example": 1
-                }
+              "type": "array",
+              "items": {
+                "$ref": "../components/schemas/StudyProcedure.json"
               }
             }
           }
