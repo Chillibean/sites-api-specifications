@@ -1,10 +1,10 @@
 {
-  "put": {
-    "summary": "Move assets between study procedures",
-    "description": "Move assets between study procedures",
-    "operationId": "moveStudyProcedureAssets",
+  "post": {
+    "summary": "Upload a part of a multipart upload",
+    "description": "Upload a part of a multipart upload",
+    "operationId": "uploadPart",
     "tags": [
-      "Study Procedure Assets"
+      "Study Procedure Uploads"
     ],
     "security": [
       {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -66,48 +66,35 @@
     ],
     "requestBody": {
       "content": {
-        "application/json": {
+        "multipart/form-data": {
           "schema": {
             "type": "object",
             "properties": {
-              "assets": {
-                "type": "array",
-                "description": "Asset IDs",
-                "items": {
-                  "type": "integer"
-                }
-              },
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "reason_for_moving": {
+              "data": {
                 "type": "string",
-                "description": "The reason for moving the assets",
-                "example": "Mistake"
+                "format": "binary",
+                "description": "The data to upload",
+                "example": "data"
               },
-              "study_event_identifier": {
-                "type": "string",
-                "description": "The study event identifier",
-                "example": "VISIT1"
+              "part_number": {
+                "type": "integer",
+                "description": "The part number",
+                "example": 1
               },
-              "study_procedure_identifier": {
-                "type": "string",
-                "description": "The study procedure identifier",
-                "example": "PROC1"
-              },
-              "subject_number": {
-                "type": "string",
-                "description": "The subject number",
-                "example": "12345678"
+              "upload_id": {
+                "type": "integer",
+                "description": "The upload id",
+                "example": 1
               }
             },
             "required": [
-              "assets",
               "authenticity_token",
-              "reason_for_moving",
-              "study_event_identifier",
-              "study_procedure_identifier",
-              "subject_number"
+              "data",
+              "part_number",
+              "upload_id"
             ],
             "additionalProperties": false
           }
@@ -120,9 +107,13 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "../components/schemas/AssetShort.json"
+              "type": "object",
+              "properties": {
+                "etag": {
+                  "type": "string",
+                  "description": "The etag",
+                  "example": "\"1234567890\""
+                }
               }
             }
           }
