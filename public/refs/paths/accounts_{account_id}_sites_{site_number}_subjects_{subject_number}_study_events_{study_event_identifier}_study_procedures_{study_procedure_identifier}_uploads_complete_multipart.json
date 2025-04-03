@@ -1,10 +1,10 @@
 {
-  "get": {
-    "summary": "Get all tasks for a study procedure",
-    "description": "Get all tasks for a study procedure",
-    "operationId": "getStudyProcedureTasks",
+  "post": {
+    "summary": "Complete a multipart upload",
+    "description": "Complete a multipart upload",
+    "operationId": "completeUpload",
     "tags": [
-      "Study Procedure Tasks"
+      "Study Procedure Uploads"
     ],
     "security": [
       {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -64,6 +64,49 @@
         }
       }
     ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              },
+              "parts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "etag": {
+                      "type": "string",
+                      "description": "The etag",
+                      "example": "\"1234567890\""
+                    },
+                    "part_number": {
+                      "type": "integer",
+                      "description": "The part number",
+                      "example": 1
+                    }
+                  }
+                }
+              },
+              "upload_id": {
+                "type": "integer",
+                "description": "The upload id",
+                "example": 1
+              }
+            },
+            "required": [
+              "authenticity_token",
+              "parts",
+              "upload_id"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
     "responses": {
       "200": {
         "description": "OK",
@@ -72,32 +115,13 @@
             "schema": {
               "type": "object",
               "properties": {
-                "tasks": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "../components/schemas/Task.json"
-                  }
+                "asset": {
+                  "$ref": "../components/schemas/Asset.json"
                 },
-                "flagged_tasks": {
-                  "type": "object",
-                  "properties": {
-                    "tasks": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "../components/schemas/FlaggedTask.json"
-                      }
-                    },
-                    "complete": {
-                      "type": "boolean",
-                      "description": "Whether all flagged tasks are completed",
-                      "example": true
-                    }
-                  }
-                },
-                "tasks_complete": {
-                  "type": "boolean",
-                  "description": "Whether all tasks are completed",
-                  "example": true
+                "status": {
+                  "type": "string",
+                  "description": "The status",
+                  "example": "success"
                 }
               }
             }

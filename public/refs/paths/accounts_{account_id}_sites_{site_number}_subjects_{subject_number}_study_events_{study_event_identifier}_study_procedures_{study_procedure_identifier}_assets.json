@@ -1,11 +1,9 @@
 {
   "get": {
-    "summary": "Get a site for account",
-    "description": "Get a site for account",
-    "operationId": "getSite",
-    "tags": [
-      "Sites"
-    ],
+    "summary": "Get all assets for a study procedure",
+    "description": "Get all assets for a study procedure",
+    "operationId": "getStudyProcedureAssets",
+    "tags": ["Study Procedure Assets"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,13 +22,43 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
           "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
         }
       }
     ],
@@ -40,7 +68,10 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/Site.json"
+              "type": "array",
+              "items": {
+                "$ref": "../components/schemas/AssetShort.json"
+              }
             }
           }
         }
