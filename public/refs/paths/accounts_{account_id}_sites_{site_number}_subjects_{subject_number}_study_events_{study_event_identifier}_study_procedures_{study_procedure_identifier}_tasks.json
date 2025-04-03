@@ -3,9 +3,7 @@
     "summary": "Get all tasks for a study procedure",
     "description": "Get all tasks for a study procedure",
     "operationId": "getStudyProcedureTasks",
-    "tags": [
-      "Study Procedure Tasks"
-    ],
+    "tags": ["Study Procedure Tasks"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",

@@ -1,10 +1,10 @@
 {
   "get": {
-    "summary": "Get a study procedure",
-    "description": "Get a study procedure",
-    "operationId": "getStudyProcedure",
+    "summary": "Get a study event",
+    "description": "Get a study event",
+    "operationId": "getStudyEvent",
     "tags": [
-      "Study Procedures"
+      "Study Events"
     ],
     "security": [
       {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -52,25 +52,15 @@
           "type": "string",
           "example": "VISIT1"
         }
-      },
-      {
-        "name": "study_procedure_identifier",
-        "in": "path",
-        "description": "The study procedure identifier",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "PROC1"
-        }
       }
     ],
     "responses": {
       "200": {
-        "description": "OK",
+        "description": "Returns a study event for a study subject",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/StudyProcedure.json"
+              "$ref": "../components/schemas/StudyEvent.json"
             }
           }
         }
@@ -96,11 +86,11 @@
     }
   },
   "put": {
-    "summary": "Update a study procedure",
-    "description": "Update a study procedure",
-    "operationId": "updateStudyProcedure",
+    "summary": "Update a study event",
+    "description": "Update a study event",
+    "operationId": "updateStudyEvent",
     "tags": [
-      "Study Procedures"
+      "Study Events"
     ],
     "security": [
       {
@@ -120,9 +110,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -148,20 +138,9 @@
           "type": "string",
           "example": "VISIT1"
         }
-      },
-      {
-        "name": "study_procedure_identifier",
-        "in": "path",
-        "description": "The study procedure identifier",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "PROC1"
-        }
       }
     ],
     "requestBody": {
-      "required": true,
       "content": {
         "application/json": {
           "schema": {
@@ -172,36 +151,13 @@
               },
               "date": {
                 "type": "string",
-                "description": "The study procedure date",
-                "example": "2023-12-21",
-                "nullable": true
-              },
-              "evaluator_id": {
-                "type": "integer",
-                "description": "The study procedure evaluator id",
-                "example": 1,
-                "nullable": true
-              },
-              "status": {
-                "type": "string",
-                "description": "The study procedure status",
-                "example": "in_progress",
-                "nullable": true
-              },
-              "form_template_fields": {
-                "type": "object",
-                "description": "The fields for a required form template",
-                "patternProperties": {
-                  "^[a-zA-Z0-9-]*$": {
-                    "type": "string",
-                    "description": "The field value",
-                    "example": "value"
-                  }
-                }
+                "description": "The date this study event took place",
+                "example": "2024-01-03"
               }
             },
             "required": [
-              "authenticity_token"
+              "authenticity_token",
+              "date"
             ],
             "additionalProperties": false
           }
@@ -222,13 +178,13 @@
                     "$ref": "../components/schemas/StudyEvent.json"
                   }
                 },
-                "study_procedure": {
-                  "$ref": "../components/schemas/StudyProcedure.json"
+                "study_event": {
+                  "$ref": "../components/schemas/StudyEvent.json"
                 }
               },
               "required": [
                 "schedule",
-                "study_procedure"
+                "study_event"
               ],
               "additionalProperties": false
             }
