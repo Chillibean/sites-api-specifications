@@ -1,11 +1,9 @@
 {
   "get": {
-    "summary": "Get all study events for a study subject",
-    "description": "Get all study events for a study subject",
-    "operationId": "getStudyEvents",
-    "tags": [
-      "Study Events"
-    ],
+    "summary": "Get all update records for a study procedure",
+    "description": "Get all update records for a study procedure",
+    "operationId": "getStudyProcedureUpdates",
+    "tags": ["Study Procedure Updates"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -42,17 +40,37 @@
           "type": "string",
           "example": "12345678"
         }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
       }
     ],
     "responses": {
       "200": {
-        "description": "Returns a list of all study events for a study subject",
+        "description": "OK",
         "content": {
           "application/json": {
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "../components/schemas/StudyEvent.json"
+                "$ref": "../components/schemas/StudyProcedureUpdate.json"
               }
             }
           }
@@ -79,12 +97,10 @@
     }
   },
   "post": {
-    "summary": "Create an unscheduled study event",
-    "description": "Create an unscheduled study event",
-    "operationId": "createUnscheduledStudyEvent",
-    "tags": [
-      "Study Events"
-    ],
+    "summary": "Create a study procedure update record",
+    "description": "Create a study procedure update record",
+    "operationId": "createStudyProcedureUpdate",
+    "tags": ["Study Procedure Updates"],
     "security": [
       {
         "userSessionKey": [],
@@ -103,9 +119,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -121,6 +137,26 @@
           "type": "string",
           "example": "12345678"
         }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
       }
     ],
     "requestBody": {
@@ -132,26 +168,13 @@
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "date": {
+              "comment": {
                 "type": "string",
-                "description": "The date this unscheduled study event took place",
-                "example": "2024-01-03"
-              },
-              "study_procedure_definition_identifiers": {
-                "type": "array",
-                "description": "The procedures that took place during this unscheduled study event",
-                "example": [
-                  "PROC1",
-                  "PROC2",
-                  "PROC3"
-                ]
+                "description": "The comment",
+                "example": "comment"
               }
             },
-            "required": [
-              "authenticity_token",
-              "date",
-              "study_procedure_definition_identifiers"
-            ],
+            "required": ["authenticity_token", "comment"],
             "additionalProperties": false
           }
         }
@@ -163,23 +186,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "schedule": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "../components/schemas/StudyEvent.json"
-                  }
-                },
-                "study_event": {
-                  "$ref": "../components/schemas/StudyEvent.json"
-                }
-              },
-              "required": [
-                "schedule",
-                "study_event"
-              ],
-              "additionalProperties": false
+              "$ref": "../components/schemas/StudyProcedureUpdate.json"
             }
           }
         }

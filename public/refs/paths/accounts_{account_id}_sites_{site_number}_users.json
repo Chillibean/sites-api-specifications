@@ -1,10 +1,10 @@
 {
   "get": {
-    "summary": "Get all valid clinical evaluator for a study procedure",
-    "description": "Get all valid clinical evaluator for a study procedure",
-    "operationId": "getStudyProcedureClinicalEvaluators",
+    "summary": "Get users for site",
+    "description": "Get users for site",
+    "operationId": "getSiteUsers",
     "tags": [
-      "Study Procedure Clinical Evaluators"
+      "Site Users"
     ],
     "security": [
       {
@@ -24,43 +24,13 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
           "example": "SITE1"
-        }
-      },
-      {
-        "name": "subject_number",
-        "in": "path",
-        "description": "The subject number",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "12345678"
-        }
-      },
-      {
-        "name": "study_event_identifier",
-        "in": "path",
-        "description": "The study event identifier",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "VISIT1"
-        }
-      },
-      {
-        "name": "study_procedure_identifier",
-        "in": "path",
-        "description": "The study procedure identifier",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "example": "PROC1"
         }
       }
     ],
