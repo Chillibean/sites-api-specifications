@@ -1,8 +1,8 @@
 {
-  "delete": {
-    "summary": "Abort a multipart upload",
-    "description": "Abort a multipart upload",
-    "operationId": "abortUpload",
+  "post": {
+    "summary": "Start a multipart upload",
+    "description": "Start a multipart upload",
+    "operationId": "startUpload",
     "tags": [
       "Study Procedure Uploads"
     ],
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -73,15 +73,21 @@
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "upload_id": {
+              "filename": {
+                "type": "string",
+                "description": "The filename",
+                "example": "file.txt"
+              },
+              "filesize": {
                 "type": "integer",
-                "description": "The upload id",
-                "example": 1
+                "description": "The filesize",
+                "example": 123456
               }
             },
             "required": [
               "authenticity_token",
-              "upload_id"
+              "filename",
+              "filesize"
             ],
             "additionalProperties": false
           }
@@ -89,7 +95,7 @@
       }
     },
     "responses": {
-      "200": {
+      "201": {
         "description": "OK",
         "content": {
           "application/json": {
