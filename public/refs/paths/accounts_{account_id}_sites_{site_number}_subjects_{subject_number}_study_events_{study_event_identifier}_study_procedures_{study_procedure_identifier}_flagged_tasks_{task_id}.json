@@ -3,9 +3,7 @@
     "summary": "Update a flagged task",
     "description": "Update a flagged task",
     "operationId": "updateStudyProcedureFlaggedTask",
-    "tags": [
-      "Study Procedure Tasks"
-    ],
+    "tags": ["Study Procedure Tasks"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -102,9 +100,7 @@
                 }
               }
             },
-            "required": [
-              "authenticity_token"
-            ],
+            "required": ["authenticity_token"],
             "additionalProperties": false
           }
         }

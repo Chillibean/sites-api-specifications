@@ -1,11 +1,9 @@
 {
   "get": {
-    "summary": "Get users for site",
-    "description": "Get users for site",
-    "operationId": "getSiteUsers",
-    "tags": [
-      "Site Users"
-    ],
+    "summary": "Get a site for account",
+    "description": "Get a site for account",
+    "operationId": "getSite",
+    "tags": ["Sites"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -40,10 +38,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "../components/schemas/SiteUser.json"
-              }
+              "$ref": "../components/schemas/Site.json"
             }
           }
         }
