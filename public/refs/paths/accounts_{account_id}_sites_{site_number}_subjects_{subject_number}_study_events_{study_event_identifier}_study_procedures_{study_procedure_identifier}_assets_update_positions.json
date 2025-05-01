@@ -1,10 +1,10 @@
 {
-  "get": {
-    "summary": "Get all study procedures for a study event",
-    "description": "Get all study procedures for a study event",
-    "operationId": "getStudyProcedures",
+  "post": {
+    "summary": "Reorder the assets in a study procedure",
+    "description": "Reorder the assets in a study procedure",
+    "operationId": "reorderStudyProcedureAssets",
     "tags": [
-      "Study Procedures"
+      "Study Procedure Assets"
     ],
     "security": [
       {
@@ -24,9 +24,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
@@ -52,8 +52,56 @@
           "type": "string",
           "example": "VISIT1"
         }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
       }
     ],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "assets": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "The asset id",
+                      "example": 1
+                    },
+                    "position": {
+                      "type": "integer",
+                      "description": "The asset position",
+                      "example": 1
+                    }
+                  }
+                }
+              },
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              }
+            },
+            "required": [
+              "assets",
+              "authenticity_token"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
     "responses": {
       "200": {
         "description": "OK",
@@ -62,7 +110,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "../components/schemas/StudyProcedure.json"
+                "$ref": "../components/schemas/AssetShort.json"
               }
             }
           }

@@ -3,9 +3,7 @@
     "summary": "Update an asset in a study procedure",
     "description": "Update an asset in a study procedure",
     "operationId": "updateStudyProcedureAsset",
-    "tags": [
-      "Study Procedure Assets"
-    ],
+    "tags": ["Study Procedure Assets"],
     "security": [
       {
         "userSessionKey": [],
@@ -24,9 +22,9 @@
         }
       },
       {
-        "name": "site_identifier",
+        "name": "site_number",
         "in": "path",
-        "description": "The site identifier",
+        "description": "The site number",
         "required": true,
         "schema": {
           "type": "string",
