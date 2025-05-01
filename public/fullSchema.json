@@ -3881,6 +3881,11 @@
             "description": "The identifier of site",
             "example": "SITE1"
           },
+          "number": {
+            "type": "string",
+            "description": "The number of site",
+            "example": "SITE1"
+          },
           "live": {
             "type": "boolean",
             "description": "The live indicator of site",
@@ -3915,7 +3920,7 @@
           "country",
           "go_live_date",
           "id",
-          "identifier",
+          "number",
           "live",
           "name",
           "permissions",
