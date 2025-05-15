@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.2.0",
+    "version": "3.3.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -1599,6 +1599,170 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/download": {
+      "post": {
+        "summary": "Request assets download from study procedure",
+        "description": "Request assets download from study procedure",
+        "operationId": "requestStudyProcedureAssetsDownload",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_identifier",
+            "in": "path",
+            "description": "The site identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "asset_ids": {
+                    "type": "array",
+                    "description": "The list of asset ids selected to download",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "rename_format": {
+                    "type": "string",
+                    "description": "The assets rename format",
+                    "example": "{AssetId}"
+                  },
+                  "video_assets_quality": {
+                    "type": "string",
+                    "description": "The quality of video assets",
+                    "example": [
+                      "original",
+                      "hd"
+                    ]
+                  }
+                },
+                "required": [
+                  "asset_ids",
+                  "authenticity_token",
+                  "rename_format",
+                  "video_assets_quality"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "progress": {
+                      "type": "integer",
+                      "description": "The number of assets processed",
+                      "example": 1
+                    },
+                    "state": {
+                      "type": "string",
+                      "description": "The download request state",
+                      "example": [
+                        "pending",
+                        "finished"
+                      ]
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "The number of assets selected",
+                      "example": 1
+                    },
+                    "uuid": {
+                      "type": "string",
+                      "description": "The download request uuid",
+                      "example": "valid_uuid"
+                    }
+                  }
                 }
               }
             }
@@ -3606,6 +3770,66 @@
             "description": "The asset id",
             "example": 1
           },
+          "media": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "The links to the asset media",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "The asset media url",
+                    "nullable": true,
+                    "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/image.png"
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "url"
+                ]
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "hd_video": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "nullable": true,
+                        "type": "string",
+                        "description": "The asset hd video status",
+                        "example": "pending"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "status"
+                    ]
+                  },
+                  "sd_video": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "nullable": true,
+                        "type": "string",
+                        "description": "The asset sd video status",
+                        "example": "pending"
+                      }
+                    },
+                    "additionalProperties": false,
+                    "required": [
+                      "status"
+                    ]
+                  }
+                },
+                "additionalProperties": false,
+                "required": [
+                  "hd_video",
+                  "sd_video"
+                ]
+              }
+            ]
+          },
           "media_type": {
             "type": "string",
             "description": "The asset media type",
@@ -3649,6 +3873,7 @@
           "extension",
           "filename",
           "id",
+          "media",
           "media_type",
           "position",
           "processed",
