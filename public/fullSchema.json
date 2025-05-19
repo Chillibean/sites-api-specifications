@@ -1624,7 +1624,7 @@
         }
       }
     },
-    "/accounts/{account_id}/sites/{site_identifier}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/download": {
+    "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/download": {
       "post": {
         "summary": "Request assets download from study procedure",
         "description": "Request assets download from study procedure",
@@ -1650,9 +1650,9 @@
             }
           },
           {
-            "name": "site_identifier",
+            "name": "site_number",
             "in": "path",
-            "description": "The site identifier",
+            "description": "The site number",
             "required": true,
             "schema": {
               "type": "string",
