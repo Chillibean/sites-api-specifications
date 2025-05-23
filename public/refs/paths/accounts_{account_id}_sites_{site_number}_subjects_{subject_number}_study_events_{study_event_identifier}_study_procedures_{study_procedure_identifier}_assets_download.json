@@ -1,0 +1,164 @@
+{
+  "post": {
+    "summary": "Request assets download from study procedure",
+    "description": "Request assets download from study procedure",
+    "operationId": "requestStudyProcedureAssetsDownload",
+    "tags": [
+      "Study Procedure Assets"
+    ],
+    "security": [
+      {
+        "userSessionKey": [],
+        "chillipharmSession": []
+      }
+    ],
+    "parameters": [
+      {
+        "name": "account_id",
+        "in": "path",
+        "description": "The account id",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "1"
+        }
+      },
+      {
+        "name": "site_number",
+        "in": "path",
+        "description": "The site number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
+        }
+      }
+    ],
+    "requestBody": {
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "asset_ids": {
+                "type": "array",
+                "description": "The list of asset ids selected to download",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "authenticity_token": {
+                "$ref": "../components/schemas/AuthenticityToken.json"
+              },
+              "rename_format": {
+                "type": "string",
+                "description": "The assets rename format",
+                "example": "{AssetId}"
+              },
+              "video_assets_quality": {
+                "type": "string",
+                "description": "The quality of video assets",
+                "example": [
+                  "original",
+                  "hd"
+                ]
+              }
+            },
+            "required": [
+              "asset_ids",
+              "authenticity_token",
+              "rename_format",
+              "video_assets_quality"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "OK",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "progress": {
+                  "type": "integer",
+                  "description": "The number of assets processed",
+                  "example": 1
+                },
+                "state": {
+                  "type": "string",
+                  "description": "The download request state",
+                  "example": [
+                    "pending",
+                    "finished"
+                  ]
+                },
+                "total": {
+                  "type": "integer",
+                  "description": "The number of assets selected",
+                  "example": 1
+                },
+                "uuid": {
+                  "type": "string",
+                  "description": "The download request uuid",
+                  "example": "valid_uuid"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "$ref": "../components/responses/BadRequest.json"
+      },
+      "401": {
+        "$ref": "../components/responses/Unauthorized.json"
+      },
+      "403": {
+        "$ref": "../components/responses/Forbidden.json"
+      },
+      "404": {
+        "$ref": "../components/responses/NotFound.json"
+      },
+      "409": {
+        "$ref": "../components/responses/Conflict.json"
+      },
+      "500": {
+        "$ref": "../components/responses/InternalServerError.json"
+      }
+    }
+  }
+}
