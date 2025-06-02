@@ -2,11 +2,31 @@
   "description": "A subject",
   "type": "object",
   "properties": {
+    "active": {
+      "type": "boolean",
+      "description": "Indicates if the subject is active",
+      "example": true
+    },
+    "any_study_events_completed": {
+      "type": "boolean",
+      "description": "Indicates if any study events have been completed for the subject",
+      "example": true
+    },
+    "any_study_events_exist": {
+      "type": "boolean",
+      "description": "Indicates if any study events exist for the subject",
+      "example": true
+    },
     "cohort": {
       "type": "string",
       "description": "The study cohort of the subject",
       "example": "Cohort 1",
       "nullable": true
+    },
+    "contains_flagged_tasks": {
+      "type": "boolean",
+      "description": "Indicates if the subject contains flagged tasks",
+      "example": false
     },
     "created_at": {
       "type": "string",
@@ -33,31 +53,17 @@
       "description": "The study arm the subject is currently in",
       "example": "Arm 1",
       "nullable": true
-    },
-    "any_study_events_exist": {
-      "type": "boolean",
-      "description": "Indicates if any study events exist for the subject",
-      "example": true
-    },
-    "any_study_events_completed": {
-      "type": "boolean",
-      "description": "Indicates if any study events have been completed for the subject",
-      "example": true
-    },
-    "active": {
-      "type": "boolean",
-      "description": "Indicates if the subject is active",
-      "example": true
     }
   },
   "required": [
+    "active",
+    "any_study_events_completed",
+    "any_study_events_exist",
+    "contains_flagged_tasks",
     "created_at",
     "created_by",
     "id",
-    "number",
-    "any_study_events_exist",
-    "any_study_events_completed",
-    "active"
+    "number"
   ],
   "additionalProperties": false
 }
