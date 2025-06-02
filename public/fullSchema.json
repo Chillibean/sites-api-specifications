@@ -4539,7 +4539,7 @@
             "example": "Cohort 1",
             "nullable": true
           },
-          "contains_flagged_tasks": {
+          "contains_incomplete_flagged_tasks": {
             "type": "boolean",
             "description": "Indicates if the subject contains flagged tasks",
             "example": false
@@ -4575,7 +4575,7 @@
           "active",
           "any_study_events_completed",
           "any_study_events_exist",
-          "contains_flagged_tasks",
+          "contains_incomplete_flagged_tasks",
           "created_at",
           "created_by",
           "id",
