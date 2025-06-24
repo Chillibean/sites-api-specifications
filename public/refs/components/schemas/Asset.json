@@ -123,7 +123,7 @@
       "type": "boolean",
       "description": "Is the asset processed",
       "example": true
-    },
+    }
   },
   "required": [
     "contains_pii",
