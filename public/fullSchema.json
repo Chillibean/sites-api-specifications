@@ -3616,8 +3616,9 @@
         "properties": {
           "contains_pii": {
             "type": "boolean",
-            "description": "Is the asset contains PII",
-            "example": false
+            "description": "The asset contain PII value",
+            "example": false,
+            "nullable": true
           },
           "id": {
             "type": "number",
