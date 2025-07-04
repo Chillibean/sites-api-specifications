@@ -2,6 +2,12 @@
   "description": "An asset",
   "type": "object",
   "properties": {
+    "contains_pii": {
+      "type": "boolean",
+      "description": "The asset contain PII value",
+      "example": false,
+      "nullable": true
+    },
     "id": {
       "type": "number",
       "description": "The asset id",
@@ -121,6 +127,7 @@
     }
   },
   "required": [
+    "contains_pii",
     "id",
     "title",
     "filename",

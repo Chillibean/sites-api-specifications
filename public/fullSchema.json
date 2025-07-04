@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "3.4.0",
+    "version": "4.0.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -3614,6 +3614,12 @@
         "description": "An asset",
         "type": "object",
         "properties": {
+          "contains_pii": {
+            "type": "boolean",
+            "description": "The asset contain PII value",
+            "example": false,
+            "nullable": true
+          },
           "id": {
             "type": "number",
             "description": "The asset id",
@@ -3733,6 +3739,7 @@
           }
         },
         "required": [
+          "contains_pii",
           "id",
           "title",
           "filename",
