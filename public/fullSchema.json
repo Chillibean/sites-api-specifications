@@ -4091,11 +4091,6 @@
         "description": "A site",
         "type": "object",
         "properties": {
-          "anonymised_assets": {
-            "type": "boolean",
-            "description": "The anonymised assets indicator of site",
-            "example": true
-          },
           "country": {
             "type": "string",
             "description": "The country of site",
@@ -4152,7 +4147,6 @@
         },
         "additionalProperties": false,
         "required": [
-          "anonymised_assets",
           "country",
           "go_live_date",
           "id",

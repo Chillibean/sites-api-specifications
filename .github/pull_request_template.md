@@ -21,20 +21,7 @@
 
 ## 🔍 Changes Made
 
-> Briefly list the key changes:
-
----
-
-## 🧩 Checklist
-
-> Make sure you’ve done these:
-
-- [ ] I have updated `package.json` & `schema.json` versions - they need to be the same
-- [ ] I have verified there are no issues with the `schema.json` by running `npm run lint`
-- [ ] I have verified that all objects have a properties list, `required` array and `additionalProperties` set to `false`
-
----
-
-## 🙋‍♂️ Notes for Reviewers
-
-> Anything specific to watch out for, tricky parts, assumptions made, or questions to raise?
+- [ ] Updated `package.json` & `schema.json` versions - they need to be the same
+- [ ] All objects have a properites list, `required` array and `additionalProperties` set to `false`
+- [ ] Update `fullSchema.json` by running `npm run bundle`
+- [ ] Verify there is no issues by running `npm run lint`
