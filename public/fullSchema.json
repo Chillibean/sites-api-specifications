@@ -1628,7 +1628,7 @@
       "post": {
         "summary": "Update an assets PII status",
         "description": "Update an assets PII status",
-        "operationId": "updateStudyProcedureAssetPII",
+        "operationId": "updateStudyProcedureAssetPii",
         "tags": [
           "Study Procedure Assets"
         ],
