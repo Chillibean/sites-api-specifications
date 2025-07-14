@@ -1708,6 +1708,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
                   "contains_pii": {
                     "type": "boolean",
                     "description": "The asset contains PII value",
@@ -1718,7 +1721,10 @@
                     "description": "The reason for change",
                     "example": "The asset contains PII"
                   }
-                }
+                },
+                "required": [
+                  "authenticity_token"
+                ]
               }
             }
           }
