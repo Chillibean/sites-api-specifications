@@ -1735,10 +1735,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Asset"
-                  }
+                  "$ref": "#/components/schemas/Asset"
                 }
               }
             }
