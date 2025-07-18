@@ -95,7 +95,8 @@
               }
             },
             "required": [
-              "authenticity_token"
+              "authenticity_token",
+              "contains_pii"
             ]
           }
         }
