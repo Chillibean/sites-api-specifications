@@ -1,19 +1,27 @@
-# Version
+## 📝 Description
 
-- 
+> Please include a summary of the change and the related issue(s).
+> What is the motivation behind this PR?
 
-# Ticket URL
+---
 
-- 
+## ✅ Type of Change
 
-# Changes Made
+> Check all that apply:
 
-- 
+- [ ] Bug fix 🐞
+- [ ] New feature ✨
+- [ ] Refactor ♻️
+- [ ] Documentation update 📚
+- [ ] Test update 🧪
+- [ ] CI/CD update ⚙️
+- [ ] Other (please describe):
 
-# Checklist
+---
 
-Please verify this checklist so that you are sure this is ready for review.
+## 🔍 Changes Made
 
 - [ ] Updated `package.json` & `schema.json` versions - they need to be the same
-- [ ] Verify there are no issues with the schema.json by running `npm run verify`
 - [ ] All objects have a properites list, `required` array and `additionalProperties` set to `false`
+- [ ] Update `fullSchema.json` by running `npm run bundle`
+- [ ] Verify there is no issues by running `npm run lint`
