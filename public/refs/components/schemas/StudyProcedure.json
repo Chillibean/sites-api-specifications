@@ -27,6 +27,11 @@
       "description": "The identifier of the procedure",
       "example": "NSTAR"
     },
+    "number_of_assets": {
+      "type": "number",
+      "description": "The number of assets in the procedure",
+      "example": 1
+    },
     "protocol": {
       "$ref": "./StudyProtocol.json"
     },
