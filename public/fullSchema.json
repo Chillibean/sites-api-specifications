@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.0.0",
+    "version": "4.1.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4604,6 +4604,11 @@
             "type": "string",
             "description": "The identifier of the procedure",
             "example": "NSTAR"
+          },
+          "number_of_assets": {
+            "type": "number",
+            "description": "The number of assets in the procedure",
+            "example": 1
           },
           "protocol": {
             "$ref": "#/components/schemas/StudyProtocol"
