@@ -1,10 +1,10 @@
 {
   "get": {
-    "summary": "Get an asset in a trial container",
-    "description": "Get an asset in a trial container",
+    "summary": "Get an asset in a study procedure",
+    "description": "Get an asset in a study procedure",
     "operationId": "getAsset",
     "tags": [
-      "Site Assets"
+      "Study Procedure Assets"
     ],
     "security": [
       {
