@@ -86,7 +86,7 @@
     "procedures",
     "study_arm",
     "protocol",
-    "study_event_type",
+    "type",
     "position",
     "contains_flagged_tasks",
     "flagged_tasks_all_completed"
