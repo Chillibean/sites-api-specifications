@@ -58,7 +58,7 @@
       "example": "Arm 1",
       "nullable": true
     },
-    "study_event_type": {
+    "type": {
       "type": "string",
       "description": "The study event type of the event",
       "example": "scheduled",
