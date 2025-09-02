@@ -1633,11 +1633,11 @@
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/{asset_id}": {
       "get": {
-        "summary": "Get an asset in a trial container",
-        "description": "Get an asset in a trial container",
-        "operationId": "getAsset",
+        "summary": "Get an asset in a study procedure",
+        "description": "Get an asset in a study procedure",
+        "operationId": "getStudyProcedureAsset",
         "tags": [
-          "Site Assets"
+          "Study Procedure Assets"
         ],
         "security": [
           {
