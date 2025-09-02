@@ -2,7 +2,7 @@
   "get": {
     "summary": "Get an asset in a study procedure",
     "description": "Get an asset in a study procedure",
-    "operationId": "getAsset",
+    "operationId": "getStudyProcedureAsset",
     "tags": [
       "Study Procedure Assets"
     ],
