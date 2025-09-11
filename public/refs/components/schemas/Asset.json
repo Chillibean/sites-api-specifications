@@ -8,43 +8,28 @@
       "example": false,
       "nullable": true
     },
-    "id": {
-      "type": "number",
-      "description": "The asset id",
-      "example": 1
-    },
-    "title": {
-      "type": "string",
-      "description": "The asset title",
-      "example": "image.png"
-    },
-    "document_type": {
-      "type": "string",
-      "description": "The asset document type",
-      "example": "image"
-    },
-    "filename": {
-      "type": "string",
-      "description": "The asset filename",
-      "example": "image.png"
-    },
     "created_at": {
       "type": "string",
       "description": "The asset created at date",
       "example": "2024-03-27T15:46:56.845Z"
+    },
+    "created_by": {
+      "$ref": "./User.json"
     },
     "extension": {
       "type": "string",
       "description": "The asset extension",
       "example": "png"
     },
-    "created_by": {
-      "$ref": "./User.json"
-    },
-    "media_type": {
+    "filename": {
       "type": "string",
-      "description": "The asset media type",
-      "example": "image"
+      "description": "The asset filename",
+      "example": "image.png"
+    },
+    "id": {
+      "type": "number",
+      "description": "The asset id",
+      "example": 1
     },
     "media": {
       "oneOf": [
@@ -83,6 +68,21 @@
         }
       ]
     },
+    "media_type": {
+      "type": "string",
+      "description": "The asset media type",
+      "example": "image"
+    },
+    "position": {
+      "type": "number",
+      "description": "The asset position",
+      "example": 16
+    },
+    "processed": {
+      "type": "boolean",
+      "description": "Is the asset processed",
+      "example": true
+    },
     "thumbnails": {
       "type": "object",
       "properties": {
@@ -99,49 +99,20 @@
           "nullable": true
         }
       }
-    },
-    "study_procedure_identifier": {
-      "type": "string",
-      "description": "The asset study procedure identifier",
-      "example": "NSTAR"
-    },
-    "study_event_identifier": {
-      "type": "string",
-      "description": "The asset study event identifier",
-      "example": "DAY1"
-    },
-    "subject_number": {
-      "type": "string",
-      "description": "The asset subject number",
-      "example": "E0001003"
-    },
-    "position": {
-      "type": "number",
-      "description": "The asset position",
-      "example": 16
-    },
-    "processed": {
-      "type": "boolean",
-      "description": "Is the asset processed",
-      "example": true
     }
   },
   "required": [
     "contains_pii",
-    "id",
-    "title",
-    "filename",
     "created_at",
-    "extension",
     "created_by",
-    "media_type",
+    "extension",
+    "filename",
+    "id",
     "media",
-    "thumbnails",
-    "study_procedure_identifier",
-    "study_event_identifier",
-    "subject_number",
+    "media_type",
     "position",
-    "processed"
+    "processed",
+    "thumbnails"
   ],
   "additionalProperties": false
 }
