@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.0.0",
+    "version": "4.1.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -1632,6 +1632,112 @@
       }
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/assets/{asset_id}": {
+      "get": {
+        "summary": "Get an asset in a study procedure",
+        "description": "Get an asset in a study procedure",
+        "operationId": "getStudyProcedureAsset",
+        "tags": [
+          "Study Procedure Assets"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_number",
+            "in": "path",
+            "description": "The site number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          },
+          {
+            "name": "asset_id",
+            "in": "path",
+            "description": "The asset id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Asset"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
       "put": {
         "summary": "Update an asset in a study procedure",
         "description": "Update an asset in a study procedure",
@@ -3891,43 +3997,28 @@
             "example": false,
             "nullable": true
           },
-          "id": {
-            "type": "number",
-            "description": "The asset id",
-            "example": 1
-          },
-          "title": {
-            "type": "string",
-            "description": "The asset title",
-            "example": "image.png"
-          },
-          "document_type": {
-            "type": "string",
-            "description": "The asset document type",
-            "example": "image"
-          },
-          "filename": {
-            "type": "string",
-            "description": "The asset filename",
-            "example": "image.png"
-          },
           "created_at": {
             "type": "string",
             "description": "The asset created at date",
             "example": "2024-03-27T15:46:56.845Z"
+          },
+          "created_by": {
+            "$ref": "#/components/schemas/User"
           },
           "extension": {
             "type": "string",
             "description": "The asset extension",
             "example": "png"
           },
-          "created_by": {
-            "$ref": "#/components/schemas/User"
-          },
-          "media_type": {
+          "filename": {
             "type": "string",
-            "description": "The asset media type",
-            "example": "image"
+            "description": "The asset filename",
+            "example": "image.png"
+          },
+          "id": {
+            "type": "number",
+            "description": "The asset id",
+            "example": 1
           },
           "media": {
             "oneOf": [
@@ -3966,6 +4057,21 @@
               }
             ]
           },
+          "media_type": {
+            "type": "string",
+            "description": "The asset media type",
+            "example": "image"
+          },
+          "position": {
+            "type": "number",
+            "description": "The asset position",
+            "example": 16
+          },
+          "processed": {
+            "type": "boolean",
+            "description": "Is the asset processed",
+            "example": true
+          },
           "thumbnails": {
             "type": "object",
             "properties": {
@@ -3982,49 +4088,20 @@
                 "nullable": true
               }
             }
-          },
-          "study_procedure_identifier": {
-            "type": "string",
-            "description": "The asset study procedure identifier",
-            "example": "NSTAR"
-          },
-          "study_event_identifier": {
-            "type": "string",
-            "description": "The asset study event identifier",
-            "example": "DAY1"
-          },
-          "subject_number": {
-            "type": "string",
-            "description": "The asset subject number",
-            "example": "E0001003"
-          },
-          "position": {
-            "type": "number",
-            "description": "The asset position",
-            "example": 16
-          },
-          "processed": {
-            "type": "boolean",
-            "description": "Is the asset processed",
-            "example": true
           }
         },
         "required": [
           "contains_pii",
-          "id",
-          "title",
-          "filename",
           "created_at",
-          "extension",
           "created_by",
-          "media_type",
+          "extension",
+          "filename",
+          "id",
           "media",
-          "thumbnails",
-          "study_procedure_identifier",
-          "study_event_identifier",
-          "subject_number",
+          "media_type",
           "position",
-          "processed"
+          "processed",
+          "thumbnails"
         ],
         "additionalProperties": false
       },
@@ -4605,6 +4682,11 @@
             "description": "The identifier of the procedure",
             "example": "NSTAR"
           },
+          "number_of_assets": {
+            "type": "number",
+            "description": "The number of assets in the procedure",
+            "example": 1
+          },
           "protocol": {
             "$ref": "#/components/schemas/StudyProtocol"
           },
@@ -4690,7 +4772,8 @@
           "required_form_id",
           "required_form_templates",
           "has_flagged_tasks",
-          "flagged_tasks_completed"
+          "flagged_tasks_completed",
+          "number_of_assets"
         ],
         "additionalProperties": false
       },
