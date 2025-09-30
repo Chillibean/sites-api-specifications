@@ -209,11 +209,11 @@
       "StudyProcedureUpdate": {
         "$ref": "refs/components/schemas/StudyProcedureUpdate.json"
       },
-      "StudyProtocol": {
-        "$ref": "refs/components/schemas/StudyProtocol.json"
+      "TrialConfiguration": {
+        "$ref": "refs/components/schemas/TrialConfiguration.json"
       },
-      "StudyProtocolObjectName": {
-        "$ref": "refs/components/schemas/StudyProtocolObjectName.json"
+      "TrialConfigurationObjectName": {
+        "$ref": "refs/components/schemas/TrialConfigurationObjectName.json"
       },
       "StudySubject": {
         "$ref": "refs/components/schemas/StudySubject.json"
