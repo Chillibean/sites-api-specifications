@@ -37,8 +37,8 @@
         "$ref": "./StudyProcedure.json"
       }
     },
-    "protocol": {
-      "$ref": "./StudyProtocol.json"
+    "trial_configuration": {
+      "$ref": "./TrialConfiguration.json"
     },
     "status": {
       "type": "string",
@@ -85,7 +85,7 @@
     "status",
     "procedures",
     "study_arm",
-    "protocol",
+    "trial_configuration",
     "type",
     "position",
     "contains_flagged_tasks",
