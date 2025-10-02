@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.1.0",
+    "version": "4.2.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4618,7 +4618,7 @@
             "example": "Arm 1",
             "nullable": true
           },
-          "study_event_type": {
+          "type": {
             "type": "string",
             "description": "The study event type of the event",
             "example": "scheduled",
@@ -4646,7 +4646,7 @@
           "procedures",
           "study_arm",
           "protocol",
-          "study_event_type",
+          "type",
           "position",
           "contains_flagged_tasks",
           "flagged_tasks_all_completed"
