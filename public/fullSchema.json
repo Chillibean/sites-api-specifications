@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.2.0",
+    "version": "4.3.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4484,12 +4484,12 @@
               "example": "can_create_forms"
             }
           },
-          "study_protocol": {
+          "trial_configuration": {
             "type": "object",
             "nullable": true,
-            "description": "The study protocol of site",
+            "description": "The trial configuration of site",
             "additionalProperties": {
-              "$ref": "#/components/schemas/StudyProtocol"
+              "$ref": "#/components/schemas/TrialConfiguration"
             }
           }
         },
@@ -4502,7 +4502,7 @@
           "live",
           "name",
           "permissions",
-          "study_protocol"
+          "trial_configuration"
         ]
       },
       "SiteUser": {
@@ -4597,8 +4597,8 @@
               "$ref": "#/components/schemas/StudyProcedure"
             }
           },
-          "protocol": {
-            "$ref": "#/components/schemas/StudyProtocol"
+          "trial_configuration": {
+            "$ref": "#/components/schemas/TrialConfiguration"
           },
           "status": {
             "type": "string",
@@ -4645,7 +4645,7 @@
           "status",
           "procedures",
           "study_arm",
-          "protocol",
+          "trial_configuration",
           "type",
           "position",
           "contains_flagged_tasks",
@@ -4687,8 +4687,8 @@
             "description": "The number of assets in the procedure",
             "example": 1
           },
-          "protocol": {
-            "$ref": "#/components/schemas/StudyProtocol"
+          "trial_configuration": {
+            "$ref": "#/components/schemas/TrialConfiguration"
           },
           "role_definitions": {
             "type": "array",
@@ -4765,7 +4765,7 @@
           "display_name",
           "date",
           "evaluator",
-          "protocol",
+          "trial_configuration",
           "role_definitions",
           "locked",
           "status",
@@ -4815,32 +4815,32 @@
           }
         }
       },
-      "StudyProtocol": {
-        "description": "A study protocol",
+      "TrialConfiguration": {
+        "description": "A trial configuration",
         "type": "object",
         "properties": {
           "id": {
             "type": "number",
-            "description": "The id of study protocol",
+            "description": "The id of trial configuration",
             "example": 1
           },
           "name": {
             "type": "string",
-            "description": "The name of study protocol",
-            "example": "Alpha Protocol"
+            "description": "The name of trial configuration",
+            "example": "Alpha Trial Configuration"
           },
           "study_event_display_name": {
             "type": "object",
             "description": "The study event display name",
             "additionalProperties": {
-              "$ref": "#/components/schemas/StudyProtocolObjectName"
+              "$ref": "#/components/schemas/TrialConfigurationObjectName"
             }
           },
           "study_procedure_display_name": {
             "type": "object",
             "description": "The study procedure display name",
             "additionalProperties": {
-              "$ref": "#/components/schemas/StudyProtocolObjectName"
+              "$ref": "#/components/schemas/TrialConfigurationObjectName"
             }
           }
         },
@@ -4852,19 +4852,19 @@
           "study_procedure_display_name"
         ]
       },
-      "StudyProtocolObjectName": {
-        "description": "A study protocol object name",
+      "TrialConfigurationObjectName": {
+        "description": "A trial configuration object name",
         "type": "object",
         "properties": {
           "plural": {
             "type": "string",
-            "description": "The plural form of study protocol object name",
-            "example": "visits"
+            "description": "The plural form of trial configuration object name",
+            "example": "trial configurations"
           },
           "singular": {
             "type": "string",
-            "description": "The singular form of study protocol object name",
-            "example": "visit"
+            "description": "The singular form of trial configuration object name",
+            "example": "trial configuration"
           }
         },
         "additionalProperties": false,

@@ -1,0 +1,21 @@
+{
+  "description": "A trial configuration object name",
+  "type": "object",
+  "properties": {
+    "plural": {
+      "type": "string",
+      "description": "The plural form of trial configuration object name",
+      "example": "trial configurations"
+    },
+    "singular": {
+      "type": "string",
+      "description": "The singular form of trial configuration object name",
+      "example": "trial configuration"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "plural",
+    "singular"
+  ]
+}

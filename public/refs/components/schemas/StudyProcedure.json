@@ -32,8 +32,8 @@
       "description": "The number of assets in the procedure",
       "example": 1
     },
-    "protocol": {
-      "$ref": "./StudyProtocol.json"
+    "trial_configuration": {
+      "$ref": "./TrialConfiguration.json"
     },
     "role_definitions": {
       "type": "array",
@@ -106,7 +106,7 @@
     "display_name",
     "date",
     "evaluator",
-    "protocol",
+    "trial_configuration",
     "role_definitions",
     "locked",
     "status",
