@@ -1,0 +1,21 @@
+{
+  "description": "A study arm",
+  "type": "object",
+  "properties": {
+    "display_name": {
+      "type": "string",
+      "description": "The name of study arm",
+      "example": "Arm A"
+    },
+    "id": {
+      "type": "number",
+      "description": "The id of study arm",
+      "example": 1
+    }
+  },
+  "required": [
+    "display_name",
+    "id"
+  ],
+  "additionalProperties": false
+}
