@@ -4558,6 +4558,27 @@
           "uuid"
         ]
       },
+      "StudyArm": {
+        "description": "A study arm",
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "The name of study arm",
+            "example": "Arm A"
+          },
+          "id": {
+            "type": "number",
+            "description": "The id of study arm",
+            "example": 1
+          }
+        },
+        "required": [
+          "display_name",
+          "id"
+        ],
+        "additionalProperties": false
+      },
       "StudyEvent": {
         "description": "A scheduled event for a subject",
         "type": "object",
@@ -4924,10 +4945,14 @@
             "example": "E001004"
           },
           "study_arm": {
-            "type": "string",
-            "description": "The study arm the subject is currently in",
-            "example": "Arm 1",
-            "nullable": true
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StudyArm"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [

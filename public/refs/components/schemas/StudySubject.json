@@ -49,10 +49,14 @@
       "example": "E001004"
     },
     "study_arm": {
-      "type": "string",
-      "description": "The study arm the subject is currently in",
-      "example": "Arm 1",
-      "nullable": true
+      "oneOf": [
+        {
+          "$ref": "./StudyArm.json"
+        },
+        {
+          "type": "null"
+        }
+      ]
     }
   },
   "required": [
