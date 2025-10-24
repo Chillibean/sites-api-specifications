@@ -4945,8 +4945,14 @@
             "example": "E001004"
           },
           "study_arm": {
-            "$ref": "#/components/schemas/StudyArm",
-            "nullable": true
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StudyArm"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         },
         "required": [
