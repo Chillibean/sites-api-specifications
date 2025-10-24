@@ -54,7 +54,8 @@
           "$ref": "./StudyArm.json"
         },
         {
-          "type": "null"
+          "type": "object",
+          "nullable": true
         }
       ]
     }

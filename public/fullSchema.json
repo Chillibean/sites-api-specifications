@@ -4950,7 +4950,8 @@
                 "$ref": "#/components/schemas/StudyArm"
               },
               {
-                "type": "null"
+                "type": "object",
+                "nullable": true
               }
             ]
           }
