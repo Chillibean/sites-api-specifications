@@ -4945,7 +4945,7 @@
             "example": "E001004"
           },
           "study_arm": {
-            "oneOf": [
+            "anyOf": [
               {
                 "$ref": "#/components/schemas/StudyArm"
               },
