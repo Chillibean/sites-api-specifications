@@ -200,6 +200,9 @@
       "SiteUser": {
         "$ref": "refs/components/schemas/SiteUser.json"
       },
+      "StudyArm": {
+        "$ref": "refs/components/schemas/StudyArm.json"
+      },
       "StudyEvent": {
         "$ref": "refs/components/schemas/StudyEvent.json"
       },
