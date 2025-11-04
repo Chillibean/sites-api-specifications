@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.2.0",
+    "version": "4.3.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -209,11 +209,11 @@
       "StudyProcedureUpdate": {
         "$ref": "refs/components/schemas/StudyProcedureUpdate.json"
       },
-      "StudyProtocol": {
-        "$ref": "refs/components/schemas/StudyProtocol.json"
+      "TrialConfiguration": {
+        "$ref": "refs/components/schemas/TrialConfiguration.json"
       },
-      "StudyProtocolObjectName": {
-        "$ref": "refs/components/schemas/StudyProtocolObjectName.json"
+      "TrialConfigurationObjectName": {
+        "$ref": "refs/components/schemas/TrialConfigurationObjectName.json"
       },
       "StudySubject": {
         "$ref": "refs/components/schemas/StudySubject.json"
