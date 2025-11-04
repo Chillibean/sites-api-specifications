@@ -1,29 +1,29 @@
 {
-  "description": "A study protocol",
+  "description": "A trial configuration",
   "type": "object",
   "properties": {
     "id": {
       "type": "number",
-      "description": "The id of study protocol",
+      "description": "The id of trial configuration",
       "example": 1
     },
     "name": {
       "type": "string",
-      "description": "The name of study protocol",
-      "example": "Alpha Protocol"
+      "description": "The name of trial configuration",
+      "example": "Alpha Trial Configuration"
     },
     "study_event_display_name": {
       "type": "object",
       "description": "The study event display name",
       "additionalProperties": {
-        "$ref": "./StudyProtocolObjectName.json"
+        "$ref": "./TrialConfigurationObjectName.json"
       }
     },
     "study_procedure_display_name": {
       "type": "object",
       "description": "The study procedure display name",
       "additionalProperties": {
-        "$ref": "./StudyProtocolObjectName.json"
+        "$ref": "./TrialConfigurationObjectName.json"
       }
     }
   },

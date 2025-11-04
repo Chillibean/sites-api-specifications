@@ -47,12 +47,12 @@
         "example": "can_create_forms"
       }
     },
-    "study_protocol": {
+    "trial_configuration": {
       "type": "object",
       "nullable": true,
-      "description": "The study protocol of site",
+      "description": "The trial configuration of site",
       "additionalProperties": {
-        "$ref": "./StudyProtocol.json"
+        "$ref": "./TrialConfiguration.json"
       }
     }
   },
@@ -65,6 +65,6 @@
     "live",
     "name",
     "permissions",
-    "study_protocol"
+    "trial_configuration"
   ]
 }
