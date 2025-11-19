@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.3.0",
+    "version": "4.4.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -199,6 +199,9 @@
       },
       "SiteUser": {
         "$ref": "refs/components/schemas/SiteUser.json"
+      },
+      "StudyArm": {
+        "$ref": "refs/components/schemas/StudyArm.json"
       },
       "StudyEvent": {
         "$ref": "refs/components/schemas/StudyEvent.json"
