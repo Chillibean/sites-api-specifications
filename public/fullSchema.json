@@ -4850,6 +4850,11 @@
             "description": "The name of trial configuration",
             "example": "Alpha Trial Configuration"
           },
+          "published": {
+            "type": "boolean",
+            "description": "Indicates if the trial configuration is published",
+            "example": true
+          },
           "study_event_display_name": {
             "type": "object",
             "description": "The study event display name",
