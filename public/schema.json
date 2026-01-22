@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.3.0",
+    "version": "4.3.1",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -152,6 +152,11 @@
     }
   },
   "components": {
+    "parameters": {
+      "XDeviceAuthHeader": {
+        "$ref": "refs/components/parameters/XDeviceAuthHeader.json"
+      }
+    },
     "securitySchemes": {
       "userSessionKey": {
         "type": "apiKey",
