@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.3.1",
+    "version": "4.4.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4583,6 +4583,27 @@
           "uuid"
         ]
       },
+      "StudyArm": {
+        "description": "A study arm",
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "The name of study arm",
+            "example": "Arm A"
+          },
+          "id": {
+            "type": "number",
+            "description": "The id of study arm",
+            "example": 1
+          }
+        },
+        "required": [
+          "display_name",
+          "id"
+        ],
+        "additionalProperties": false
+      },
       "StudyEvent": {
         "description": "A scheduled event for a subject",
         "type": "object",
@@ -4854,6 +4875,11 @@
             "description": "The name of trial configuration",
             "example": "Alpha Trial Configuration"
           },
+          "published": {
+            "type": "boolean",
+            "description": "Indicates if the trial configuration is published",
+            "example": true
+          },
           "study_event_display_name": {
             "type": "object",
             "description": "The study event display name",
@@ -4949,10 +4975,15 @@
             "example": "E001004"
           },
           "study_arm": {
-            "type": "string",
-            "description": "The study arm the subject is currently in",
-            "example": "Arm 1",
-            "nullable": true
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StudyArm"
+              },
+              {
+                "type": "object",
+                "nullable": true
+              }
+            ]
           }
         },
         "required": [
