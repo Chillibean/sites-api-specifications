@@ -152,6 +152,11 @@
     }
   },
   "components": {
+    "parameters": {
+      "XDeviceAuthHeader": {
+        "$ref": "refs/components/parameters/XDeviceAuthHeader.json"
+      }
+    },
     "securitySchemes": {
       "userSessionKey": {
         "type": "apiKey",
