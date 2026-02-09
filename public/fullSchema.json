@@ -4509,6 +4509,11 @@
               "example": "can_create_forms"
             }
           },
+          "principal_investigator": {
+            "type": "string",
+            "description": "The name of principal investigator",
+            "example": "Test Name"
+          },
           "trial_configuration": {
             "type": "object",
             "nullable": true,
@@ -4527,6 +4532,7 @@
           "live",
           "name",
           "permissions",
+          "principal_investigator",
           "trial_configuration"
         ]
       },
