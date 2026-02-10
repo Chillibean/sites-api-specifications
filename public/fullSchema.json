@@ -4532,8 +4532,7 @@
           "live",
           "name",
           "permissions",
-          "principal_investigator",
-          "trial_configuration"
+          "principal_investigator"
         ]
       },
       "SiteUser": {
