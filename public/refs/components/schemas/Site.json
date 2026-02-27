@@ -50,7 +50,8 @@
     "principal_investigator": {
       "type": "string",
       "description": "The name of principal investigator",
-      "example": "Test Name"
+      "example": "Test Name",
+      "nullable": true
     },
     "trial_configuration": {
       "type": "object",
