@@ -61,9 +61,9 @@
         "$ref": "./TrialConfiguration.json"
       }
     },
-    "unscheduled_event_serial_number": {
+    "unscheduled_study_event_serial_number": {
       "type": "number",
-      "description": "The serial number of unscheduled event",
+      "description": "The serial number of unscheduled study event",
       "example": 0
     }
   },
@@ -77,6 +77,6 @@
     "name",
     "permissions",
     "trial_configuration",
-    "unscheduled_event_serial_number"
+    "unscheduled_study_event_serial_number"
   ]
 }
