@@ -4522,11 +4522,6 @@
             "additionalProperties": {
               "$ref": "#/components/schemas/TrialConfiguration"
             }
-          },
-          "unscheduled_study_event_serial_number": {
-            "type": "number",
-            "description": "The serial number of unscheduled study event",
-            "example": 1
           }
         },
         "additionalProperties": false,
@@ -4538,8 +4533,7 @@
           "live",
           "name",
           "permissions",
-          "trial_configuration",
-          "unscheduled_study_event_serial_number"
+          "trial_configuration"
         ]
       },
       "SiteUser": {
@@ -4996,6 +4990,11 @@
                 "nullable": true
               }
             ]
+          },
+          "unscheduled_study_event_serial_number": {
+            "type": "number",
+            "description": "The serial number of unscheduled study event",
+            "example": 1
           }
         },
         "required": [
@@ -5006,7 +5005,8 @@
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "unscheduled_study_event_serial_number"
         ],
         "additionalProperties": false
       },
