@@ -60,6 +60,11 @@
       "additionalProperties": {
         "$ref": "./TrialConfiguration.json"
       }
+    },
+    "unscheduled_study_event_serial_number": {
+      "type": "number",
+      "description": "The serial number of unscheduled study event",
+      "example": 0
     }
   },
   "additionalProperties": false,
@@ -71,6 +76,7 @@
     "live",
     "name",
     "permissions",
-    "trial_configuration"
+    "trial_configuration",
+    "unscheduled_study_event_serial_number"
   ]
 }
