@@ -60,6 +60,12 @@
       "additionalProperties": {
         "$ref": "./TrialConfiguration.json"
       }
+    },
+    "unscheduled_event_serial_number": {
+      "type": "integer",
+      "description": "The serial number of unscheduled event",
+      "example": "Test Name",
+      "nullable": true
     }
   },
   "additionalProperties": false,
@@ -71,6 +77,7 @@
     "live",
     "name",
     "permissions",
-    "trial_configuration"
+    "trial_configuration",
+    "unscheduled_event_serial_number"
   ]
 }
