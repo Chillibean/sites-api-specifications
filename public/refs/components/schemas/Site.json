@@ -62,10 +62,9 @@
       }
     },
     "unscheduled_event_serial_number": {
-      "type": "integer",
+      "type": "number",
       "description": "The serial number of unscheduled event",
-      "example": "Test Name",
-      "nullable": true
+      "example": 0
     }
   },
   "additionalProperties": false,
