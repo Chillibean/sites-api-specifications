@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.4.0",
+    "version": "4.5.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4508,6 +4508,12 @@
               "description": "The permission name",
               "example": "can_create_forms"
             }
+          },
+          "principal_investigator": {
+            "type": "string",
+            "description": "The name of principal investigator",
+            "example": "Test Name",
+            "nullable": true
           },
           "trial_configuration": {
             "type": "object",
