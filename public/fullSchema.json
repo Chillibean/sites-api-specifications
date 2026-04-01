@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.5.0",
+    "version": "4.6.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -4990,6 +4990,11 @@
                 "nullable": true
               }
             ]
+          },
+          "unscheduled_study_event_serial_number": {
+            "type": "number",
+            "description": "The serial number of unscheduled study event",
+            "example": 1
           }
         },
         "required": [
@@ -5000,7 +5005,8 @@
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "unscheduled_study_event_serial_number"
         ],
         "additionalProperties": false
       },
