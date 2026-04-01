@@ -3,7 +3,9 @@
     "summary": "Get all update records for a study procedure",
     "description": "Get all update records for a study procedure",
     "operationId": "getStudyProcedureUpdates",
-    "tags": ["Study Procedure Updates"],
+    "tags": [
+      "Study Procedure Updates"
+    ],
     "security": [
       {
         "userSessionKey": [],
@@ -100,7 +102,9 @@
     "summary": "Create a study procedure update record",
     "description": "Create a study procedure update record",
     "operationId": "createStudyProcedureUpdate",
-    "tags": ["Study Procedure Updates"],
+    "tags": [
+      "Study Procedure Updates"
+    ],
     "security": [
       {
         "userSessionKey": [],
@@ -170,11 +174,14 @@
               },
               "comment": {
                 "type": "string",
-                "description": "The comment",
-                "example": "comment"
+                "description": "Raw comment",
+                "example": "Test 𒍅@user_80435b66-3743-4f20-8a74-0b072ab43bb8𒍅 please review 𒍅@user_e2j3kb66-43dj-cmoe2-5iwo-0b072ab43bb8𒍅"
               }
             },
-            "required": ["authenticity_token", "comment"],
+            "required": [
+              "authenticity_token",
+              "comment"
+            ],
             "additionalProperties": false
           }
         }
