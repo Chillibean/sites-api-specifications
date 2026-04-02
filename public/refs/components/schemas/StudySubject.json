@@ -58,6 +58,11 @@
           "nullable": true
         }
       ]
+    },
+    "unscheduled_study_event_serial_number": {
+      "type": "number",
+      "description": "The serial number of unscheduled study event",
+      "example": 1
     }
   },
   "required": [
@@ -68,7 +73,8 @@
     "created_at",
     "created_by",
     "id",
-    "number"
+    "number",
+    "unscheduled_study_event_serial_number"
   ],
   "additionalProperties": false
 }
