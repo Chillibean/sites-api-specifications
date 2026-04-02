@@ -1,8 +1,8 @@
 {
   "get": {
-    "summary": "Get all update records for a study procedure",
-    "description": "Get all update records for a study procedure",
-    "operationId": "getStudyProcedureUpdates",
+    "summary": "Subscription status to study procedure updates notifciations",
+    "description": "Subscription status to study procedure updates notifciations",
+    "operationId": "statusStudyProcedureUpdatesNotifications",
     "tags": [
       "Study Procedure Updates"
     ],
@@ -70,9 +70,13 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "../components/schemas/StudyProcedureUpdate.json"
+              "type": "object",
+              "properties": {
+                "subscribed": {
+                  "type": "boolean",
+                  "description": "Subscription status",
+                  "example": true
+                }
               }
             }
           }
@@ -99,9 +103,9 @@
     }
   },
   "post": {
-    "summary": "Create a study procedure update record",
-    "description": "Create a study procedure update record",
-    "operationId": "createStudyProcedureUpdate",
+    "summary": "Subscribe to study procedure updates notifciations",
+    "description": "Subscribe to study procedure updates notifciations",
+    "operationId": "subscribeStudyProcedureUpdatesNotifications",
     "tags": [
       "Study Procedure Updates"
     ],
@@ -172,15 +176,15 @@
               "authenticity_token": {
                 "$ref": "../components/schemas/AuthenticityToken.json"
               },
-              "comment": {
-                "type": "string",
-                "description": "Raw comment",
-                "example": "Test 𒍅@user_80435b66-3743-4f20-8a74-0b072ab43bb8𒍅 please review 𒍅@user_e2j3kb66-43dj-cmoe2-5iwo-0b072ab43bb8𒍅"
+              "subscribed": {
+                "type": "boolean",
+                "description": "Subscription status",
+                "example": true
               }
             },
             "required": [
               "authenticity_token",
-              "comment"
+              "subscribed"
             ],
             "additionalProperties": false
           }
@@ -188,12 +192,19 @@
       }
     },
     "responses": {
-      "201": {
+      "200": {
         "description": "OK",
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/StudyProcedureUpdate.json"
+              "type": "object",
+              "properties": {
+                "subscribed": {
+                  "type": "boolean",
+                  "description": "Subscription status",
+                  "example": true
+                }
+              }
             }
           }
         }
