@@ -150,7 +150,7 @@
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/uploads/upload_part": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_number}_subjects_{subject_number}_study_events_{study_event_identifier}_study_procedures_{study_procedure_identifier}_uploads_upload_part.json"
     },
-    "/accounts/{account_id}/sites/{site_number}/users{?permissions}": {
+    "/accounts/{account_id}/sites/{site_number}/users": {
       "$ref": "refs/paths/accounts_{account_id}_sites_{site_number}_users.json"
     }
   },

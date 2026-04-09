@@ -32,22 +32,6 @@
           "type": "string",
           "example": "SITE1"
         }
-      },
-      {
-        "name": "permissions",
-        "in": "query",
-        "description": "Permissions that user should have",
-        "required": false,
-        "schema": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "The permission name",
-            "example": "can_create_forms"
-          }
-        },
-        "style": "form",
-        "explode": false
       }
     ],
     "responses": {
