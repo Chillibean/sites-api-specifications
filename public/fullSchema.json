@@ -3316,7 +3316,16 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StudyProcedureUpdate"
+                  "type": "object",
+                  "properties": {
+                    "update": {
+                      "$ref": "#/components/schemas/StudyProcedureUpdate"
+                    },
+                    "auto_subscribed": {
+                      "type": "boolean",
+                      "description": "If user was automatically subscribed to update notifications"
+                    }
+                  }
                 }
               }
             }
