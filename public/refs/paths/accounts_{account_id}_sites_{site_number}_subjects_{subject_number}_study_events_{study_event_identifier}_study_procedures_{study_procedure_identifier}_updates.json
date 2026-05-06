@@ -193,7 +193,16 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "../components/schemas/StudyProcedureUpdate.json"
+              "type": "object",
+              "properties": {
+                "update": {
+                  "$ref": "../components/schemas/StudyProcedureUpdate.json"
+                },
+                "auto_subscribed": {
+                  "type": "boolean",
+                  "description": "If user was automatically subscribed to update notifications"
+                }
+              }
             }
           }
         }
