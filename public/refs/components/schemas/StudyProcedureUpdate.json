@@ -31,8 +31,8 @@
     },
     "update_message": {
       "type": "string",
-      "description": "The update message",
-      "example": "update"
+      "description": "Formatted update message",
+      "example": "Test 𒍅@Jane Doe𒍅 please review with 𒍅@John Smith𒍅"
     }
   }
 }

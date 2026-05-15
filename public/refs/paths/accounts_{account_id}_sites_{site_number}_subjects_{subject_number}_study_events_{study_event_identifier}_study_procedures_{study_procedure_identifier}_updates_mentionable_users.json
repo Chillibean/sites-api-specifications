@@ -1,10 +1,10 @@
 {
   "get": {
-    "summary": "Get users for site",
-    "description": "Get users for site",
-    "operationId": "getSiteUsers",
+    "summary": "Viewing all mentionable users",
+    "description": "Viewing all mentionable users",
+    "operationId": "getStudyProcedureUpdatesMentionableUsers",
     "tags": [
-      "Site Users"
+      "Study Procedure Updates"
     ],
     "security": [
       {
@@ -31,6 +31,36 @@
         "schema": {
           "type": "string",
           "example": "SITE1"
+        }
+      },
+      {
+        "name": "subject_number",
+        "in": "path",
+        "description": "The subject number",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "12345678"
+        }
+      },
+      {
+        "name": "study_event_identifier",
+        "in": "path",
+        "description": "The study event identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "VISIT1"
+        }
+      },
+      {
+        "name": "study_procedure_identifier",
+        "in": "path",
+        "description": "The study procedure identifier",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PROC1"
         }
       }
     ],
