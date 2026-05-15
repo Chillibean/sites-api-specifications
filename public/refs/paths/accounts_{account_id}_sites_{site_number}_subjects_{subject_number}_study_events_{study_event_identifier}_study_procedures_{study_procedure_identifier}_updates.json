@@ -1,7 +1,7 @@
 {
   "get": {
-    "summary": "Get all update records for a study procedure",
-    "description": "Get all update records for a study procedure",
+    "summary": "Viewing all study procedure updates",
+    "description": "Viewing all study procedure updates",
     "operationId": "getStudyProcedureUpdates",
     "tags": [
       "Study Procedure Updates"
@@ -99,8 +99,8 @@
     }
   },
   "post": {
-    "summary": "Create a study procedure update record",
-    "description": "Create a study procedure update record",
+    "summary": "Creating a study procedure update",
+    "description": "Creating a study procedure update",
     "operationId": "createStudyProcedureUpdate",
     "tags": [
       "Study Procedure Updates"

@@ -3123,8 +3123,8 @@
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates": {
       "get": {
-        "summary": "Get all update records for a study procedure",
-        "description": "Get all update records for a study procedure",
+        "summary": "Viewing all study procedure updates",
+        "description": "Viewing all study procedure updates",
         "operationId": "getStudyProcedureUpdates",
         "tags": [
           "Study Procedure Updates"
@@ -3222,8 +3222,8 @@
         }
       },
       "post": {
-        "summary": "Create a study procedure update record",
-        "description": "Create a study procedure update record",
+        "summary": "Creating a study procedure update",
+        "description": "Creating a study procedure update",
         "operationId": "createStudyProcedureUpdate",
         "tags": [
           "Study Procedure Updates"
@@ -3344,8 +3344,8 @@
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates/subscribe": {
       "get": {
-        "summary": "Subscription status to study procedure updates notifciations",
-        "description": "Subscription status to study procedure updates notifciations",
+        "summary": "Viewing subscription status to notifications",
+        "description": "Viewing subscription status to a study procedure updates notifications",
         "operationId": "statusStudyProcedureUpdatesNotifications",
         "tags": [
           "Study Procedure Updates"
@@ -3447,8 +3447,8 @@
         }
       },
       "post": {
-        "summary": "Subscribe to study procedure updates notifciations",
-        "description": "Subscribe to study procedure updates notifciations",
+        "summary": "Subscribing to notifications",
+        "description": "Subscribing to a study procedure updates notifications",
         "operationId": "subscribeStudyProcedureUpdatesNotifications",
         "tags": [
           "Study Procedure Updates"
@@ -3576,8 +3576,8 @@
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates/mentionable_users": {
       "get": {
-        "summary": "Get list of users that can be mentioned in an update",
-        "description": "Get list of users that can be mentioned in an update",
+        "summary": "Viewing all mentionable users",
+        "description": "Viewing all mentionable users",
         "operationId": "getStudyProcedureUpdatesMentionableUsers",
         "tags": [
           "Study Procedure Updates"
