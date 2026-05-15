@@ -1,7 +1,7 @@
 {
   "get": {
-    "summary": "Get list of users that can be mentioned in an update",
-    "description": "Get list of users that can be mentioned in an update",
+    "summary": "Viewing all mentionable users",
+    "description": "Viewing all mentionable users",
     "operationId": "getStudyProcedureUpdatesMentionableUsers",
     "tags": [
       "Study Procedure Updates"

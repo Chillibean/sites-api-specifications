@@ -1,7 +1,7 @@
 {
   "get": {
-    "summary": "Subscription status to study procedure updates notifciations",
-    "description": "Subscription status to study procedure updates notifciations",
+    "summary": "Viewing subscription status to notifications",
+    "description": "Viewing subscription status to a study procedure updates notifications",
     "operationId": "statusStudyProcedureUpdatesNotifications",
     "tags": [
       "Study Procedure Updates"
@@ -103,8 +103,8 @@
     }
   },
   "post": {
-    "summary": "Subscribe to study procedure updates notifciations",
-    "description": "Subscribe to study procedure updates notifciations",
+    "summary": "Subscribing to notifications",
+    "description": "Subscribing to a study procedure updates notifications",
     "operationId": "subscribeStudyProcedureUpdatesNotifications",
     "tags": [
       "Study Procedure Updates"
