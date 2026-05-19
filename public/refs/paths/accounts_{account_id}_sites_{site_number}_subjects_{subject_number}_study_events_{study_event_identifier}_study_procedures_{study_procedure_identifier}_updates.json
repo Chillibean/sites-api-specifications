@@ -175,7 +175,7 @@
               "comment": {
                 "type": "string",
                 "description": "Raw comment",
-                "example": "Test 𒍅@user_80435b66-3743-4f20-8a74-0b072ab43bb8𒍅 please review 𒍅@user_e2j3kb66-43dj-cmoe2-5iwo-0b072ab43bb8𒍅"
+                "example": "Test 𒍅@user:80435b66-3743-4f20-8a74-0b072ab43bb8𒍅 please review 𒍅@user:e2j3kb66-43dj-cmoe2-5iwo-0b072ab43bb8𒍅"
               }
             },
             "required": [
