@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "version": "4.3.0",
+    "version": "4.7.0",
     "title": "Sites API",
     "description": "This is the api specifications for all things related to sites.",
     "contact": {
@@ -3123,8 +3123,8 @@
     },
     "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates": {
       "get": {
-        "summary": "Get all update records for a study procedure",
-        "description": "Get all update records for a study procedure",
+        "summary": "Viewing all study procedure updates",
+        "description": "Viewing all study procedure updates",
         "operationId": "getStudyProcedureUpdates",
         "tags": [
           "Study Procedure Updates"
@@ -3222,8 +3222,8 @@
         }
       },
       "post": {
-        "summary": "Create a study procedure update record",
-        "description": "Create a study procedure update record",
+        "summary": "Creating a study procedure update",
+        "description": "Creating a study procedure update",
         "operationId": "createStudyProcedureUpdate",
         "tags": [
           "Study Procedure Updates"
@@ -3297,8 +3297,8 @@
                   },
                   "comment": {
                     "type": "string",
-                    "description": "The comment",
-                    "example": "comment"
+                    "description": "Raw comment",
+                    "example": "Test 𒍅@user:80435b66-3743-4f20-8a74-0b072ab43bb8𒍅 please review 𒍅@user:e2j3kb66-43dj-cmoe2-5iwo-0b072ab43bb8𒍅"
                   }
                 },
                 "required": [
@@ -3316,7 +3316,349 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/StudyProcedureUpdate"
+                  "type": "object",
+                  "properties": {
+                    "update": {
+                      "$ref": "#/components/schemas/StudyProcedureUpdate"
+                    },
+                    "auto_subscribed": {
+                      "type": "boolean",
+                      "description": "If user was automatically subscribed to update notifications"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates/subscribe": {
+      "get": {
+        "summary": "Viewing subscription status to notifications",
+        "description": "Viewing subscription status to a study procedure updates notifications",
+        "operationId": "statusStudyProcedureUpdatesNotifications",
+        "tags": [
+          "Study Procedure Updates"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_number",
+            "in": "path",
+            "description": "The site number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "subscribed": {
+                      "type": "boolean",
+                      "description": "Subscription status",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      },
+      "post": {
+        "summary": "Subscribing to notifications",
+        "description": "Subscribing to a study procedure updates notifications",
+        "operationId": "subscribeStudyProcedureUpdatesNotifications",
+        "tags": [
+          "Study Procedure Updates"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_number",
+            "in": "path",
+            "description": "The site number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "authenticity_token": {
+                    "$ref": "#/components/schemas/AuthenticityToken"
+                  },
+                  "subscribed": {
+                    "type": "boolean",
+                    "description": "Subscription status",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "authenticity_token",
+                  "subscribed"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "subscribed": {
+                      "type": "boolean",
+                      "description": "Subscription status",
+                      "example": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/accounts/{account_id}/sites/{site_number}/subjects/{subject_number}/study_events/{study_event_identifier}/study_procedures/{study_procedure_identifier}/updates/mentionable_users": {
+      "get": {
+        "summary": "Viewing all mentionable users",
+        "description": "Viewing all mentionable users",
+        "operationId": "getStudyProcedureUpdatesMentionableUsers",
+        "tags": [
+          "Study Procedure Updates"
+        ],
+        "security": [
+          {
+            "userSessionKey": [],
+            "chillipharmSession": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "account_id",
+            "in": "path",
+            "description": "The account id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "1"
+            }
+          },
+          {
+            "name": "site_number",
+            "in": "path",
+            "description": "The site number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "SITE1"
+            }
+          },
+          {
+            "name": "subject_number",
+            "in": "path",
+            "description": "The subject number",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "12345678"
+            }
+          },
+          {
+            "name": "study_event_identifier",
+            "in": "path",
+            "description": "The study event identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "VISIT1"
+            }
+          },
+          {
+            "name": "study_procedure_identifier",
+            "in": "path",
+            "description": "The study procedure identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "PROC1"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SiteUser"
+                  }
                 }
               }
             }
@@ -3357,6 +3699,9 @@
           }
         ],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/XDeviceAuthHeader"
+          },
           {
             "name": "account_id",
             "in": "path",
@@ -3486,6 +3831,9 @@
           }
         ],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/XDeviceAuthHeader"
+          },
           {
             "name": "account_id",
             "in": "path",
@@ -3638,6 +3986,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/components/parameters/XDeviceAuthHeader"
+          },
+          {
             "name": "account_id",
             "in": "path",
             "description": "The account id",
@@ -3772,6 +4123,9 @@
           }
         ],
         "parameters": [
+          {
+            "$ref": "#/components/parameters/XDeviceAuthHeader"
+          },
           {
             "name": "account_id",
             "in": "path",
@@ -3972,6 +4326,19 @@
     }
   },
   "components": {
+    "parameters": {
+      "XDeviceAuthHeader": {
+        "name": "X-Device-Auth",
+        "in": "header",
+        "description": "The device authentication header in format <unix_timestamp>:<hmac_sha256_hex>",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "pattern": "^[0-9]{10}:[a-f0-9]{64}$",
+          "example": "1768985802:807b42ac2a5679f7db340e711d14119c05e989ddf06e45fd1992cb6c0a1bf12e"
+        }
+      }
+    },
     "securitySchemes": {
       "userSessionKey": {
         "type": "apiKey",
@@ -4484,6 +4851,12 @@
               "example": "can_create_forms"
             }
           },
+          "principal_investigator": {
+            "type": "string",
+            "description": "The name of principal investigator",
+            "example": "Test Name",
+            "nullable": true
+          },
           "trial_configuration": {
             "type": "object",
             "nullable": true,
@@ -4557,6 +4930,27 @@
           "last_name",
           "uuid"
         ]
+      },
+      "StudyArm": {
+        "description": "A study arm",
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "The name of study arm",
+            "example": "Arm A"
+          },
+          "id": {
+            "type": "number",
+            "description": "The id of study arm",
+            "example": 1
+          }
+        },
+        "required": [
+          "display_name",
+          "id"
+        ],
+        "additionalProperties": false
       },
       "StudyEvent": {
         "description": "A scheduled event for a subject",
@@ -4810,8 +5204,8 @@
           },
           "update_message": {
             "type": "string",
-            "description": "The update message",
-            "example": "update"
+            "description": "Formatted update message",
+            "example": "Test 𒍅@Jane Doe𒍅 please review with 𒍅@John Smith𒍅"
           }
         }
       },
@@ -4828,6 +5222,11 @@
             "type": "string",
             "description": "The name of trial configuration",
             "example": "Alpha Trial Configuration"
+          },
+          "published": {
+            "type": "boolean",
+            "description": "Indicates if the trial configuration is published",
+            "example": true
           },
           "study_event_display_name": {
             "type": "object",
@@ -4924,10 +5323,20 @@
             "example": "E001004"
           },
           "study_arm": {
-            "type": "string",
-            "description": "The study arm the subject is currently in",
-            "example": "Arm 1",
-            "nullable": true
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StudyArm"
+              },
+              {
+                "type": "object",
+                "nullable": true
+              }
+            ]
+          },
+          "unscheduled_study_event_serial_number": {
+            "type": "number",
+            "description": "The serial number of unscheduled study event",
+            "example": 1
           }
         },
         "required": [
@@ -4938,7 +5347,8 @@
           "created_at",
           "created_by",
           "id",
-          "number"
+          "number",
+          "unscheduled_study_event_serial_number"
         ],
         "additionalProperties": false
       },

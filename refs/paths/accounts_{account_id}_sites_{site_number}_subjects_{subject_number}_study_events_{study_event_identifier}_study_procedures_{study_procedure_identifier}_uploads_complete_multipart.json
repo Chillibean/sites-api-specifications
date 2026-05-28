@@ -14,6 +14,9 @@
     ],
     "parameters": [
       {
+        "$ref": "../components/parameters/XDeviceAuthHeader.json"
+      },
+      {
         "name": "account_id",
         "in": "path",
         "description": "The account id",
