@@ -69,7 +69,7 @@ Here's an example of the development workflow:
 5. Create another branch named **`task/CP-1000-add-users-endpoint`**.
 6. Update **`/public/schema.json`** to include the new users' endpoint.
 7. Push to GitHub and create a Pull Request pointing to development branch, eg. **`development-v1.0.11`**.
-8. Once Pull Request is in ready to review state, a pre-release is generated and `sites-api-client-sdk` repository is tiggered to generate a new SDK package. Package version follows development branch version number + build run number, eg. **`1.0.11-dev.5`**.
+8. Once Pull Request is in ready to review state, a pre-release is generated and `sites-api-client-sdk` repository is triggered to generate a new SDK package. Package version follows development branch version number + build run number, eg. **`1.0.11-dev.5`**.
 9. Update your service with the new SDK to test the pre-release version.
 10. If everything works, get approval to merge your branch into the development branch **`development-v1.0.11`**.
 11. Once ready in **`development-v1.0.11`**, get approval to merge into **`main`**.
