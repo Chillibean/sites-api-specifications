@@ -5105,7 +5105,8 @@
               "in_progress",
               "complete",
               "requires_attention",
-              "not_required"
+              "not_required",
+              "not_recorded"
             ]
           },
           "required_form_id": {
