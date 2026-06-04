@@ -89,8 +89,8 @@
     }
   },
   "post": {
-    "summary": "Create a study procedure for a study event",
-    "description": "Create a study procedure for a study event",
+    "summary": "Create a study procedures for a study event",
+    "description": "Create a study procedures for a study event",
     "operationId": "createStudyProcedure",
     "tags": [
       "Study Procedures"
@@ -154,7 +154,7 @@
               },
               "study_procedure_definition_identifiers": {
                 "type": "array",
-                "description": "The procedures that took place during this unscheduled study event",
+                "description": "The list of procedures to add to a study event",
                 "example": [
                   "PROC1",
                   "PROC2",
