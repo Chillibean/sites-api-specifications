@@ -5230,18 +5230,10 @@
             "example": true
           },
           "study_event_display_name": {
-            "type": "object",
-            "description": "The study event display name",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/TrialConfigurationObjectName"
-            }
+            "$ref": "#/components/schemas/TrialConfigurationObjectName"
           },
           "study_procedure_display_name": {
-            "type": "object",
-            "description": "The study procedure display name",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/TrialConfigurationObjectName"
-            }
+            "$ref": "#/components/schemas/TrialConfigurationObjectName"
           }
         },
         "additionalProperties": false,
