@@ -18,18 +18,10 @@
       "example": true
     },
     "study_event_display_name": {
-      "type": "object",
-      "description": "The study event display name",
-      "additionalProperties": {
-        "$ref": "./TrialConfigurationObjectName.json"
-      }
+      "$ref": "./TrialConfigurationObjectName.json"
     },
     "study_procedure_display_name": {
-      "type": "object",
-      "description": "The study procedure display name",
-      "additionalProperties": {
-        "$ref": "./TrialConfigurationObjectName.json"
-      }
+      "$ref": "./TrialConfigurationObjectName.json"
     }
   },
   "additionalProperties": false,
