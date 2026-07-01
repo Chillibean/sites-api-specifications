@@ -4502,7 +4502,6 @@
                   "url": {
                     "type": "string",
                     "description": "The asset media url",
-                    "nullable": true,
                     "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/image.png"
                   }
                 },
@@ -4518,7 +4517,6 @@
                     "type": "object",
                     "properties": {
                       "status": {
-                        "nullable": true,
                         "type": "string",
                         "description": "The asset hd video status",
                         "example": "pending"
@@ -4533,7 +4531,6 @@
                     "type": "object",
                     "properties": {
                       "status": {
-                        "nullable": true,
                         "type": "string",
                         "description": "The asset sd video status",
                         "example": "pending"
