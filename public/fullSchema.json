@@ -3919,7 +3919,6 @@
                   }
                 },
                 "required": [
-                  "authenticity_token",
                   "parts",
                   "upload_id"
                 ],
@@ -4060,7 +4059,6 @@
                   }
                 },
                 "required": [
-                  "authenticity_token",
                   "filename",
                   "filesize"
                 ],
@@ -4204,7 +4202,6 @@
                   }
                 },
                 "required": [
-                  "authenticity_token",
                   "data",
                   "part_number",
                   "upload_id"
@@ -5461,7 +5458,6 @@
           },
           "url": {
             "type": "string",
-            "nullable": true,
             "description": "The video url",
             "example": "https://eu-west-4-chillipharm-bucket.s3.eu-west-4.amazonaws.com/assets/video.mp4"
           }
