@@ -48,6 +48,11 @@
       "description": "The serial number of the subject",
       "example": "E001004"
     },
+    "number_of_study_events": {
+      "type": "number",
+      "description": "The number of study events assigned to this subject",
+      "example": 5
+    },
     "study_arm": {
       "anyOf": [
         {
@@ -74,6 +79,7 @@
     "created_by",
     "id",
     "number",
+    "number_of_study_events",
     "unscheduled_study_event_serial_number"
   ],
   "additionalProperties": false
