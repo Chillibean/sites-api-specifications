@@ -1,0 +1,10 @@
+{
+  "description": "Unprocessable Entity. The request is valid but cannot be processed in the current state of the resource.",
+  "content": {
+    "application/json": {
+      "schema": {
+        "$ref": "../schemas/Error.json"
+      }
+    }
+  }
+}
